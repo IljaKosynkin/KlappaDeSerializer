@@ -7,9 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5F07EB781E388E2300B1DD7A /* KLPDeserializerFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F07EB761E388E2300B1DD7A /* KLPDeserializerFactory.h */; };
+		5F07EB791E388E2300B1DD7A /* KLPDeserializerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F07EB771E388E2300B1DD7A /* KLPDeserializerFactory.m */; };
+		5F07EB7B1E38B72A00B1DD7A /* KLPDeserializable.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F07EB7A1E38B72A00B1DD7A /* KLPDeserializable.h */; };
+		5F08A0DE1E3D42A500056C51 /* SimpleObject2.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */; };
+		5F08A0E01E3D45A200056C51 /* KLPStrategiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */; };
+		5F08A0E21E3D69BC00056C51 /* KLPDeserializerFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */; };
+		5F0F3D411E3C9DEB00D65752 /* KLPValueConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0F3D401E3C9DEB00D65752 /* KLPValueConverter.h */; };
 		5F12E6D01E3515B400A5D59D /* KlappaDeSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F12E6C61E3515B400A5D59D /* KlappaDeSerializer.framework */; };
-		5F12E6D51E3515B400A5D59D /* KlappaDeSerializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6D41E3515B400A5D59D /* KlappaDeSerializerTests.m */; };
+		5F12E6D51E3515B400A5D59D /* KLPStandardDeserializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6D41E3515B400A5D59D /* KLPStandardDeserializerTests.m */; };
 		5F12E6D71E3515B400A5D59D /* KlappaDeSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6C91E3515B400A5D59D /* KlappaDeSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5F12E6E51E35319700A5D59D /* KLPStandardDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6E31E35319700A5D59D /* KLPStandardDeserializer.h */; };
+		5F12E6E61E35319700A5D59D /* KLPStandardDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6E41E35319700A5D59D /* KLPStandardDeserializer.m */; };
+		5F12E6E91E35331200A5D59D /* KLPFieldsRetriever.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6E71E35331200A5D59D /* KLPFieldsRetriever.h */; };
+		5F12E6EA1E35331200A5D59D /* KLPFieldsRetriever.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6E81E35331200A5D59D /* KLPFieldsRetriever.m */; };
+		5F12E6EC1E3536B700A5D59D /* KLPNamingStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6EB1E3536B700A5D59D /* KLPNamingStrategy.h */; };
+		5F12E6EF1E35372D00A5D59D /* KLPExplicitNamingStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6ED1E35372D00A5D59D /* KLPExplicitNamingStrategy.h */; };
+		5F12E6F01E35372D00A5D59D /* KLPExplicitNamingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6EE1E35372D00A5D59D /* KLPExplicitNamingStrategy.m */; };
+		5F12E6F41E35472F00A5D59D /* KLPDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6F31E35472F00A5D59D /* KLPDeserializer.h */; };
+		5F4757B91E37E655007A38B7 /* KLPDefaultNamingStrategy.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F4757B71E37E655007A38B7 /* KLPDefaultNamingStrategy.h */; };
+		5F4757BA1E37E655007A38B7 /* KLPDefaultNamingStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4757B81E37E655007A38B7 /* KLPDefaultNamingStrategy.m */; };
+		5F912D3C1E3AA6F2007AB67F /* Array.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D381E3AA6F2007AB67F /* Array.json */; };
+		5F912D3D1E3AA6F2007AB67F /* NestedObject.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D391E3AA6F2007AB67F /* NestedObject.json */; };
+		5F912D3E1E3AA6F2007AB67F /* NestedObjectWithArray.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D3A1E3AA6F2007AB67F /* NestedObjectWithArray.json */; };
+		5F912D3F1E3AA6F2007AB67F /* SimpleObject.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D3B1E3AA6F2007AB67F /* SimpleObject.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -23,12 +44,34 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5F07EB761E388E2300B1DD7A /* KLPDeserializerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDeserializerFactory.h; sourceTree = "<group>"; };
+		5F07EB771E388E2300B1DD7A /* KLPDeserializerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDeserializerFactory.m; sourceTree = "<group>"; };
+		5F07EB7A1E38B72A00B1DD7A /* KLPDeserializable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDeserializable.h; sourceTree = "<group>"; };
+		5F08A0D91E3CF27100056C51 /* KLPConvertedTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLPConvertedTypes.h; sourceTree = "<group>"; };
+		5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SimpleObject2.json; sourceTree = "<group>"; };
+		5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStrategiesTest.m; sourceTree = "<group>"; };
+		5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDeserializerFactoryTests.m; sourceTree = "<group>"; };
+		5F0F3D401E3C9DEB00D65752 /* KLPValueConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPValueConverter.h; sourceTree = "<group>"; };
 		5F12E6C61E3515B400A5D59D /* KlappaDeSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KlappaDeSerializer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F12E6C91E3515B400A5D59D /* KlappaDeSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KlappaDeSerializer.h; sourceTree = "<group>"; };
 		5F12E6CA1E3515B400A5D59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F12E6CF1E3515B400A5D59D /* KlappaDeSerializerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlappaDeSerializerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5F12E6D41E3515B400A5D59D /* KlappaDeSerializerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KlappaDeSerializerTests.m; sourceTree = "<group>"; };
+		5F12E6D41E3515B400A5D59D /* KLPStandardDeserializerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLPStandardDeserializerTests.m; sourceTree = "<group>"; };
 		5F12E6D61E3515B400A5D59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5F12E6E31E35319700A5D59D /* KLPStandardDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPStandardDeserializer.h; sourceTree = "<group>"; };
+		5F12E6E41E35319700A5D59D /* KLPStandardDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStandardDeserializer.m; sourceTree = "<group>"; };
+		5F12E6E71E35331200A5D59D /* KLPFieldsRetriever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPFieldsRetriever.h; sourceTree = "<group>"; };
+		5F12E6E81E35331200A5D59D /* KLPFieldsRetriever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPFieldsRetriever.m; sourceTree = "<group>"; };
+		5F12E6EB1E3536B700A5D59D /* KLPNamingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPNamingStrategy.h; sourceTree = "<group>"; };
+		5F12E6ED1E35372D00A5D59D /* KLPExplicitNamingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPExplicitNamingStrategy.h; sourceTree = "<group>"; };
+		5F12E6EE1E35372D00A5D59D /* KLPExplicitNamingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPExplicitNamingStrategy.m; sourceTree = "<group>"; };
+		5F12E6F31E35472F00A5D59D /* KLPDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDeserializer.h; sourceTree = "<group>"; };
+		5F4757B71E37E655007A38B7 /* KLPDefaultNamingStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDefaultNamingStrategy.h; sourceTree = "<group>"; };
+		5F4757B81E37E655007A38B7 /* KLPDefaultNamingStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDefaultNamingStrategy.m; sourceTree = "<group>"; };
+		5F912D381E3AA6F2007AB67F /* Array.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Array.json; sourceTree = "<group>"; };
+		5F912D391E3AA6F2007AB67F /* NestedObject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NestedObject.json; sourceTree = "<group>"; };
+		5F912D3A1E3AA6F2007AB67F /* NestedObjectWithArray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NestedObjectWithArray.json; sourceTree = "<group>"; };
+		5F912D3B1E3AA6F2007AB67F /* SimpleObject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SimpleObject.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +93,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5F07EB7C1E38B7EE00B1DD7A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				5F07EB7A1E38B72A00B1DD7A /* KLPDeserializable.h */,
+				5F12E6F31E35472F00A5D59D /* KLPDeserializer.h */,
+				5F0F3D401E3C9DEB00D65752 /* KLPValueConverter.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		5F12E6BC1E3515B400A5D59D = {
 			isa = PBXGroup;
 			children = (
@@ -71,8 +124,16 @@
 		5F12E6C81E3515B400A5D59D /* KlappaDeSerializer */ = {
 			isa = PBXGroup;
 			children = (
+				5F07EB7C1E38B7EE00B1DD7A /* Protocols */,
+				5F12E6F21E3537AF00A5D59D /* Utils */,
+				5F12E6F11E35377400A5D59D /* NamingStrategies */,
 				5F12E6C91E3515B400A5D59D /* KlappaDeSerializer.h */,
 				5F12E6CA1E3515B400A5D59D /* Info.plist */,
+				5F08A0D91E3CF27100056C51 /* KLPConvertedTypes.h */,
+				5F12E6E31E35319700A5D59D /* KLPStandardDeserializer.h */,
+				5F12E6E41E35319700A5D59D /* KLPStandardDeserializer.m */,
+				5F07EB761E388E2300B1DD7A /* KLPDeserializerFactory.h */,
+				5F07EB771E388E2300B1DD7A /* KLPDeserializerFactory.m */,
 			);
 			path = KlappaDeSerializer;
 			sourceTree = "<group>";
@@ -80,10 +141,46 @@
 		5F12E6D31E3515B400A5D59D /* KlappaDeSerializerTests */ = {
 			isa = PBXGroup;
 			children = (
-				5F12E6D41E3515B400A5D59D /* KlappaDeSerializerTests.m */,
+				5F912D371E3A8DF7007AB67F /* JSON */,
 				5F12E6D61E3515B400A5D59D /* Info.plist */,
+				5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */,
+				5F12E6D41E3515B400A5D59D /* KLPStandardDeserializerTests.m */,
+				5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */,
 			);
 			path = KlappaDeSerializerTests;
+			sourceTree = "<group>";
+		};
+		5F12E6F11E35377400A5D59D /* NamingStrategies */ = {
+			isa = PBXGroup;
+			children = (
+				5F12E6EB1E3536B700A5D59D /* KLPNamingStrategy.h */,
+				5F12E6ED1E35372D00A5D59D /* KLPExplicitNamingStrategy.h */,
+				5F12E6EE1E35372D00A5D59D /* KLPExplicitNamingStrategy.m */,
+				5F4757B71E37E655007A38B7 /* KLPDefaultNamingStrategy.h */,
+				5F4757B81E37E655007A38B7 /* KLPDefaultNamingStrategy.m */,
+			);
+			name = NamingStrategies;
+			sourceTree = "<group>";
+		};
+		5F12E6F21E3537AF00A5D59D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5F12E6E71E35331200A5D59D /* KLPFieldsRetriever.h */,
+				5F12E6E81E35331200A5D59D /* KLPFieldsRetriever.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		5F912D371E3A8DF7007AB67F /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				5F912D381E3AA6F2007AB67F /* Array.json */,
+				5F912D391E3AA6F2007AB67F /* NestedObject.json */,
+				5F912D3A1E3AA6F2007AB67F /* NestedObjectWithArray.json */,
+				5F912D3B1E3AA6F2007AB67F /* SimpleObject.json */,
+				5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,7 +190,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F07EB781E388E2300B1DD7A /* KLPDeserializerFactory.h in Headers */,
+				5F0F3D411E3C9DEB00D65752 /* KLPValueConverter.h in Headers */,
+				5F4757B91E37E655007A38B7 /* KLPDefaultNamingStrategy.h in Headers */,
+				5F12E6E91E35331200A5D59D /* KLPFieldsRetriever.h in Headers */,
+				5F12E6EC1E3536B700A5D59D /* KLPNamingStrategy.h in Headers */,
+				5F12E6EF1E35372D00A5D59D /* KLPExplicitNamingStrategy.h in Headers */,
+				5F12E6E51E35319700A5D59D /* KLPStandardDeserializer.h in Headers */,
 				5F12E6D71E3515B400A5D59D /* KlappaDeSerializer.h in Headers */,
+				5F07EB7B1E38B72A00B1DD7A /* KLPDeserializable.h in Headers */,
+				5F12E6F41E35472F00A5D59D /* KLPDeserializer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +254,7 @@
 					5F12E6C51E3515B400A5D59D = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = RCNGG8L4U7;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 					5F12E6CE1E3515B400A5D59D = {
@@ -187,6 +294,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F912D3E1E3AA6F2007AB67F /* NestedObjectWithArray.json in Resources */,
+				5F912D3C1E3AA6F2007AB67F /* Array.json in Resources */,
+				5F912D3F1E3AA6F2007AB67F /* SimpleObject.json in Resources */,
+				5F912D3D1E3AA6F2007AB67F /* NestedObject.json in Resources */,
+				5F08A0DE1E3D42A500056C51 /* SimpleObject2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +309,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F12E6E61E35319700A5D59D /* KLPStandardDeserializer.m in Sources */,
+				5F12E6F01E35372D00A5D59D /* KLPExplicitNamingStrategy.m in Sources */,
+				5F07EB791E388E2300B1DD7A /* KLPDeserializerFactory.m in Sources */,
+				5F4757BA1E37E655007A38B7 /* KLPDefaultNamingStrategy.m in Sources */,
+				5F12E6EA1E35331200A5D59D /* KLPFieldsRetriever.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,7 +321,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F12E6D51E3515B400A5D59D /* KlappaDeSerializerTests.m in Sources */,
+				5F08A0E01E3D45A200056C51 /* KLPStrategiesTest.m in Sources */,
+				5F08A0E21E3D69BC00056C51 /* KLPDeserializerFactoryTests.m in Sources */,
+				5F12E6D51E3515B400A5D59D /* KLPStandardDeserializerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +437,7 @@
 		5F12E6DB1E3515B400A5D59D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RCNGG8L4U7;
@@ -330,12 +450,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kappacino.inc.KlappaDeSerializer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		5F12E6DC1E3515B400A5D59D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = RCNGG8L4U7;
@@ -348,6 +471,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = kappacino.inc.KlappaDeSerializer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -392,6 +516,7 @@
 				5F12E6DC1E3515B400A5D59D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F12E6DD1E3515B400A5D59D /* Build configuration list for PBXNativeTarget "KlappaDeSerializerTests" */ = {
 			isa = XCConfigurationList;
@@ -400,6 +525,7 @@
 				5F12E6DF1E3515B400A5D59D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
