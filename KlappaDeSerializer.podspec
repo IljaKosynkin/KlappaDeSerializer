@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/IljaKosynkin/KlappaDeSerializer.git", :tag => "v1.0.0" }
 
-  s.source_files  = "KlappaDeSerializer", "KlappaDeSerializer/*.{h,m}"
+  s.source_files  = "KlappaDeSerializer", "KlappaDeSerializer/**/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
 
   s.platform = :ios, '5.0'

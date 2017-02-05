@@ -6,14 +6,14 @@
 //  Copyright © 2017 Ilja Kosynkin. All rights reserved.
 //
 
-#import "KLPDeserializerFactory.h"
+#import "KLPDeserializer.h"
 #import "KLPStandardDeserializer.h"
 #import <UIKit/UIKit.h>
 
-static id<KLPDeserializer> defaultDeserializer;
+static id<KLPDeserializerProtocol> defaultDeserializer;
 static NSMutableDictionary* fieldsDeserializers;
 
-@implementation KLPDeserializerFactory
+@implementation KLPDeserializer
 
 - (instancetype)init {
     [NSException raise:@"This object is not supposed to be created" format:@""];
@@ -39,10 +39,10 @@ static NSMutableDictionary* fieldsDeserializers;
     id object;
     if ([json hasPrefix:@"{"]) {
         NSDictionary* dictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        object = [KLPDeserializerFactory deserializeWithDictionary:deserializationClass jsonDictionary:dictionary];
+        object = [KLPDeserializer deserializeWithDictionary:deserializationClass jsonDictionary:dictionary];
     } else {
         NSArray* array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&error];
-        object = [KLPDeserializerFactory deserializeWithArray:deserializationClass array:array];
+        object = [KLPDeserializer deserializeWithArray:deserializationClass array:array];
     }
     
     if (error != nil) {
@@ -60,7 +60,7 @@ static NSMutableDictionary* fieldsDeserializers;
     
     for (id object in json) {
         if ([object isKindOfClass:[NSDictionary class]]) {
-            [objects addObject:[KLPDeserializerFactory deserializeWithDictionary:deserializationClass jsonDictionary:object]];
+            [objects addObject:[KLPDeserializer deserializeWithDictionary:deserializationClass jsonDictionary:object]];
         } else if ([object isKindOfClass:[NSArray class]]) {
             [NSException raise:@"Nested arrays are not supported" format:@"[[], [], []] JSONs of such format are not suported"];
         } else {
@@ -83,21 +83,21 @@ static NSMutableDictionary* fieldsDeserializers;
     if (fieldsDeserializers == nil) fieldsDeserializers = [[NSMutableDictionary alloc] init];
     
     NSString* key = [fieldName stringByAppendingString: (context != nil ? NSStringFromClass(*context) : @"")];
-    id<KLPDeserializer> deserializer = fieldsDeserializers[key];
+    id<KLPDeserializerProtocol> deserializer = fieldsDeserializers[key];
     if (deserializer == nil) {
         deserializer = fieldsDeserializers[fieldName];
     }
     return deserializer == nil ? [defaultDeserializer deserialize:deserializationClass json:json] : [deserializer deserialize:deserializationClass json:json];
 }
 
-+ (void) setDefaultDeserializer:(id<KLPDeserializer>) deserializer {
++ (void) setDefaultDeserializer:(id<KLPDeserializerProtocol>) deserializer {
     if (defaultDeserializer == nil) defaultDeserializer = [[KLPStandardDeserializer alloc] init];
     if (fieldsDeserializers == nil) fieldsDeserializers = [[NSMutableDictionary alloc] init];
     
     defaultDeserializer = deserializer;
 }
 
-+ (void) registerDeserializer:(id<KLPDeserializer>) deserializer name:(NSString*) fieldName context:(Class<KLPDeserializer>*) context {
++ (void) registerDeserializer:(id<KLPDeserializerProtocol>) deserializer name:(NSString*) fieldName context:(Class<KLPDeserializable>*) context {
     if (defaultDeserializer == nil) defaultDeserializer = [[KLPStandardDeserializer alloc] init];
     if (fieldsDeserializers == nil) fieldsDeserializers = [[NSMutableDictionary alloc] init];
     
@@ -106,4 +106,11 @@ static NSMutableDictionary* fieldsDeserializers;
     fieldsDeserializers[key] = deserializer;
 }
 
+- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output {
+    [defaultDeserializer addValueConverter:converter forField:fieldName forInputType:type forOutputClass:output];
+}
+
+- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output {
+    [defaultDeserializer addValueConverterForCustomClass:converter forField:fieldName forCustomClass:type forOutputClass:output];
+}
 @end

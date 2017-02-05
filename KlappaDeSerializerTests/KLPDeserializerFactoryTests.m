@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "KLPDeserializerFactory.h"
+#import "KLPDeserializer.h"
 #import "KLPStandardDeserializer.h"
 #import "KLPExplicitNamingStrategy.h"
 
@@ -51,7 +51,7 @@
 
 @end
 
-@interface KLPFNestedObjectWithArray : NSObject
+@interface KLPFNestedObjectWithArray : NSObject<KLPDeserializable>
 
 @property NSString* firstName;
 @property NSString* lastName;
@@ -71,7 +71,7 @@
 
 @end
 
-@interface KLPAddressDeserializer : NSObject<KLPDeserializer>
+@interface KLPAddressDeserializer : NSObject<KLPDeserializerProtocol>
 
 - (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy;
 - (id) deserialize:(Class) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
@@ -129,7 +129,7 @@
 
 - (void) testJsonStringSimpleObjectParsing {
     NSString* json = [self getJsonFile:@"SimpleObject"];
-    KLPFSimpleObject* object = [KLPDeserializerFactory deserializeWithString:[KLPFSimpleObject class] jsonString:json];
+    KLPFSimpleObject* object = [KLPDeserializer deserializeWithString:[KLPFSimpleObject class] jsonString:json];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.name isEqualToString:@"A green door"]);
@@ -139,7 +139,7 @@
 
 - (void) testJsonStringNestedObjectParse {
     NSString* json = [self getJsonFile:@"NestedObject"];
-    KLPFNestedObject* object = [KLPDeserializerFactory deserializeWithString:[KLPFNestedObject class] jsonString:json];
+    KLPFNestedObject* object = [KLPDeserializer deserializeWithString:[KLPFNestedObject class] jsonString:json];
     XCTAssertNotNil(object);
     XCTAssertTrue([object.title isEqualToString:@"potato jpg"]);
     XCTAssertTrue([object.summary isEqualToString:@"Kentang Si bungsu dari keluarga Solanum tuberosum L ini ternyata memiliki khasiat untuk mengurangi kerutan  jerawat  bintik hitam dan kemerahan pada kulit  Gunakan seminggu sekali sebagai"] == YES);
@@ -159,7 +159,7 @@
 
 - (void) testJsonStringArrayParsing {
     NSString* json = [self getJsonFile:@"Array"];
-    NSArray* objects = [KLPDeserializerFactory deserializeWithString:[KLPFNestedObject class] jsonString:json];
+    NSArray* objects = [KLPDeserializer deserializeWithString:[KLPFNestedObject class] jsonString:json];
     for (KLPFNestedObject* object in objects) {
         XCTAssertNotNil(object);
         XCTAssertTrue([object.title isEqualToString:@"potato jpg"]);
@@ -182,11 +182,11 @@
 - (void) testCustomDeserializer {
     NSString* json = [self getJsonFile:@"NestedObjectWithArray"];
     
-    id<KLPDeserializer> deserializer = [[KLPAddressDeserializer alloc] init];
+    id<KLPDeserializerProtocol> deserializer = [[KLPAddressDeserializer alloc] init];
     Class cls = [KLPFNestedObjectWithArray class];
-    [KLPDeserializerFactory registerDeserializer:deserializer name:@"address" context:&cls];
+    [KLPDeserializer registerDeserializer:deserializer name:@"address" context:&cls];
     
-    KLPFNestedObjectWithArray* object = [KLPDeserializerFactory deserializeWithString:[KLPFNestedObjectWithArray class] jsonString:json];
+    KLPFNestedObjectWithArray* object = [KLPDeserializer deserializeWithString:[KLPFNestedObjectWithArray class] jsonString:json];
     XCTAssertNotNil(object.address);
     XCTAssertTrue([object.address.streetAddress isEqualToString:@"a"]);
     XCTAssertTrue([object.address.postalCode isEqualToString:@"a"]);

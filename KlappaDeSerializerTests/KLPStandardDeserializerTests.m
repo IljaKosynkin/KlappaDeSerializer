@@ -99,7 +99,7 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface NestedObjectWithArray : NSObject
+@interface NestedObjectWithArray : NSObject<KLPDeserializable>
 
 @property NSString* firstName;
 @property NSString* lastName;

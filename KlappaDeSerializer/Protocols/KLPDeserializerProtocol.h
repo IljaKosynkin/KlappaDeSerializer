@@ -1,5 +1,5 @@
 //
-//  KLPStandardDeserializer.h
+//  KLPDeserializer.h
 //  KlappaDeSerializer
 //
 //  Created by Ilja Kosynkin on 1/22/17.
@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "KLPDeserializer.h"
+#import "KLPNamingStrategy.h"
 #import "KLPDeserializable.h"
 #import "KLPValueConverter.h"
 #import "KLPConvertedTypes.h"
 
-@interface KLPStandardDeserializer : NSObject<KLPDeserializer>
+@protocol KLPDeserializerProtocol <NSObject>
 - (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy;
-- (id) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
+- (id<KLPDeserializable>) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
 - (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output;
 - (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output;
 @end

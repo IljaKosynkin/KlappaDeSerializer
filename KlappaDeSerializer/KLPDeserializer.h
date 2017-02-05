@@ -1,15 +1,25 @@
 //
-//  KLPDeserializer.h
+//  KLPDeserializerFactory.h
 //  KlappaDeSerializer
 //
-//  Created by Ilja Kosynkin on 1/22/17.
+//  Created by Ilja Kosynkin on 1/25/17.
 //  Copyright © 2017 Ilja Kosynkin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "KLPNamingStrategy.h"
+#import "KLPDeserializable.h"
+#import "KLPDeserializerProtocol.h"
 
-@protocol KLPDeserializer <NSObject>
-- (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy;
-- (id) deserialize:(Class) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
+@interface KLPDeserializer : NSObject
++ (id) deserializeWithString:(Class<KLPDeserializable>) deserializationClass jsonString:(NSString*) json;
++ (NSArray*) deserializeWithArray:(Class<KLPDeserializable>) deserializationClass array:(NSArray*) json;
+
++ (id) deserializeWithDictionary:(Class<KLPDeserializable>) deserializationClass jsonDictionary:(NSDictionary*) json;
++ (id) deserializeWithDictionaryForField:(Class<KLPDeserializable>) deserializationClass jsonDictionary:(NSDictionary*) json field:(NSString*) fieldName context:(Class*) context;
+
++ (void) setDefaultDeserializer:(id<KLPDeserializerProtocol>) defaultDeserializer;
++ (void) registerDeserializer:(id<KLPDeserializerProtocol>) deserializer name:(NSString*) fieldName context:(Class<KLPDeserializable>*) context;
+
+- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output;
+- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output;
 @end

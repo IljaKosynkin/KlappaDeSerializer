@@ -6,34 +6,28 @@
 //  Copyright © 2017 Ilja Kosynkin. All rights reserved.
 //
 
-#import "KLPFieldsRetriever.h"
+#import "KLPDefaultFieldsRetriever.h"
 #import <objc/runtime.h>
 
-@implementation KLPFieldsRetriever
+@implementation KLPDefaultFieldsRetriever
 
-+(NSString*) extractSwiftRepresentation:(NSString*) type {
-    NSString* projectName = [NSString stringWithUTF8String:getprogname()];
-    NSRange range = [type rangeOfString:projectName];
-    NSString* secondPart = [type substringFromIndex:range.location + range.length];
-    NSRange projectOccurence = [secondPart rangeOfString:projectName];
+- (NSString*) extractSwiftRepresentation:(NSString*) type {
+    NSString* regString = @"_Tt.[0-9]+(.+)[0-9]+(.+)";
+    NSRegularExpression* extraction = [NSRegularExpression regularExpressionWithPattern:regString options:0 error:NULL];
     
-    NSString* stringWithNumber;
-    if (projectOccurence.location != NSNotFound) {
-        stringWithNumber = [secondPart substringToIndex:projectOccurence.location];
-    } else {
-        stringWithNumber = secondPart;
-    }
+    NSArray* matches = [extraction matchesInString:type options:0 range:NSMakeRange(0, [type length])];
+    NSTextCheckingResult* matchesResult = [matches objectAtIndex:0];
     
-    NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:@"([0-9]+).*" options:0 error:NULL];
-    NSTextCheckingResult* match = [regex firstMatchInString:stringWithNumber options:0 range:NSMakeRange(0, [stringWithNumber length])];
-    NSString* extractedNumber = [stringWithNumber substringWithRange:[match rangeAtIndex:1]];
-    int parsedValue = [extractedNumber intValue];
+    NSRange nameRange = [matchesResult rangeAtIndex:1];
+    NSRange classRange = [matchesResult rangeAtIndex:2];
     
-    NSString* className = [secondPart substringWithRange:NSMakeRange([extractedNumber length], parsedValue)];
+    NSString* projectName = [type substringWithRange:nameRange];
+    NSString* className = [type substringWithRange:classRange];
+    
     return [[projectName stringByAppendingString:@"."] stringByAppendingString:className];
 }
 
-+(void) getFieldsOfClass:(Class)class fields:(NSMutableDictionary**) fieldsMap {
+- (void) getFieldsOfClass:(Class)class fields:(NSMutableDictionary**) fieldsMap {
     unsigned int count;
     
     objc_property_t* props = class_copyPropertyList(class, &count);
@@ -61,7 +55,7 @@
         }
             
         if ([parsedType hasPrefix:@"_Tt"]) {
-            parsedType = [KLPFieldsRetriever extractSwiftRepresentation:parsedType];
+            parsedType = [self extractSwiftRepresentation:parsedType];
         }
         
         (*fieldsMap)[name] = parsedType;
@@ -70,19 +64,19 @@
     free(props);
 }
 
-+(void) getFieldsOfObject:(id)object fields:(NSDictionary**) fieldsMap {
+- (NSDictionary*) getFields:(id) object; {
     NSMutableDictionary* fields = [[NSMutableDictionary alloc] init];
     
     Class currentClass = [object class];
     while (YES) {
-        [KLPFieldsRetriever getFieldsOfClass:currentClass fields:&fields];
+        [self getFieldsOfClass:currentClass fields:&fields];
         currentClass = [currentClass superclass];
         if (currentClass == [NSObject class]) {
             break;
         }
     }
     
-    *fieldsMap = fields;
+    return fields;
 }
 
 @end

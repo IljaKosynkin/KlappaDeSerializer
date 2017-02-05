@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KLPFieldsRetriever.h"
 
-@interface KLPFieldsRetriever : NSObject
-+(void) getFieldsOfObject:(id)object fields:(NSDictionary**) fieldsMap;
+@interface KLPDefaultFieldsRetriever : NSObject<KLPFieldsRetriever>
+- (NSDictionary*) getFields:(id) object;
 @end
