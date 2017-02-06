@@ -241,7 +241,8 @@ Lets consider following JSON sample:
  "Width": "145"
  }
  }
-]```
+]
+```
 And according class declaration:
 ```objective-c
 @interface KLPFThumbnail : NSObject
