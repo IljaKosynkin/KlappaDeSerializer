@@ -284,4 +284,10 @@ or
 ```objective-c
 NSArray* objects = [KLPDeserializer deserializeWithString:[KLPFNestedObject class] jsonString:json];
 ```
-  
+# Custom name mapping
+## Naming strategies
+Naming strategy - is a class that decides how the name of field from JSON should be translated to the name of a class. 
+KlappaDeSerializer provides two strategies out of the box: KLPDefaultNamingStrategy and KLPExplicitNamingStrategy.
+Explicit naming strategy is translates field from JSON one-to-one. For example, if you have field named "awesome_field" 
+
+
