@@ -13,6 +13,7 @@
 @interface KLPDeserializer : NSObject
 + (id) deserializeWithString:(Class<KLPDeserializable>) deserializationClass jsonString:(NSString*) json;
 + (NSArray*) deserializeWithArray:(Class<KLPDeserializable>) deserializationClass array:(NSArray*) json;
++ (NSArray*) deserializeWithArrayOfPrimitives:(NSArray*) json;
 
 + (id) deserializeWithDictionary:(Class<KLPDeserializable>) deserializationClass jsonDictionary:(NSDictionary*) json;
 + (id) deserializeWithDictionaryForField:(Class<KLPDeserializable>) deserializationClass jsonDictionary:(NSDictionary*) json field:(NSString*) fieldName context:(Class*) context;

@@ -71,6 +71,18 @@ static NSMutableDictionary* fieldsDeserializers;
     return objects;
 }
 
++ (NSArray*) deserializeWithArrayOfPrimitives:(NSArray*) json {
+    if (defaultDeserializer == nil) defaultDeserializer = [[KLPStandardDeserializer alloc] init];
+    if (fieldsDeserializers == nil) fieldsDeserializers = [[NSMutableDictionary alloc] init];
+    
+    NSMutableArray* primitives = [[NSMutableArray alloc] init];
+    for (id object in json) {
+        [primitives addObject:object];
+    }
+ 
+    return primitives;
+}
+
 + (id) deserializeWithDictionary:(Class<KLPDeserializable>) deserializationClass jsonDictionary:(NSDictionary*) json {
     if (defaultDeserializer == nil) defaultDeserializer = [[KLPStandardDeserializer alloc] init];
     if (fieldsDeserializers == nil) fieldsDeserializers = [[NSMutableDictionary alloc] init];

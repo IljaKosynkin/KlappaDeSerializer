@@ -56,9 +56,10 @@ static NSString* separator = @"|\\o/|";
         } else if ([value isKindOfClass:[NSArray class]]) {
             Class<KLPDeserializable> expectedClass = [self.extractor getType:object forField:key];
             if (expectedClass == nil) {
-                [NSException raise:@"Class for field not found." format:@"Couldn't find class mapping for field %@", translatedKey];
+                [object setValue:[KLPDeserializer deserializeWithArrayOfPrimitives:value] forKey:translatedKey];
+            } else {
+                [object setValue:[KLPDeserializer deserializeWithArray:expectedClass array:value] forKey:translatedKey];
             }
-            [object setValue:[KLPDeserializer deserializeWithArray:expectedClass array:value] forKey:translatedKey];
         } else {
             NSString* extendedKey = [key stringByAppendingString:[separator stringByAppendingString:NSStringFromClass([value class])]];
             NSString* fullKey = [extendedKey stringByAppendingString:[separator stringByAppendingString:type]];
