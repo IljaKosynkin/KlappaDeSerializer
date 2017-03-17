@@ -18,7 +18,9 @@ static KLPStandardDeserializer* deserializer;
 @end
 
 @implementation SimpleObject
-
++ (NSArray*) getRequiredFields {
+    return @[@"name"];
+}
 @end
 
 @interface SimpleObject2 : NSObject
@@ -253,6 +255,13 @@ static KLPStandardDeserializer* deserializer;
     XCTAssertNotNil(object);
     XCTAssertTrue([object.Name isEqualToString:@"A green door"]);
     XCTAssertTrue([object.Price isEqual:@12.50]);
+}
+
+- (void) testShouldNotParseJsonWithoutRequiredProperty {
+    NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject3"];
+    SimpleObject* object = [deserializer deserialize:[SimpleObject class] json:jsonDict];
+    
+    XCTAssertNil(object);
 }
 
 @end

@@ -80,6 +80,12 @@ static NSString* separator = @"|\\o/|";
         }
     }
     
+    for (NSString* name in [classToDeserialize getRequiredFields]) {
+        if ([object valueForKey:name] == nil) {
+            return nil;
+        }
+    }
+    
     return object;
 }
 

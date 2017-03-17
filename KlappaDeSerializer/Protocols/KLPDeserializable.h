@@ -14,6 +14,7 @@
 
 + (NSDictionary*) getFieldsToClassMap;
 + (NSDictionary*) getCustomFieldsMapping;
++ (NSArray*) getRequiredFields;
 @end
 
 @interface NSObject(KLPDeserializableCategory) <KLPDeserializable>
@@ -26,6 +27,11 @@
 }
 
 + (NSDictionary*) getCustomFieldsMapping {
+    return nil;
+}
+
+
++ (NSArray*) getRequiredFields {
     return nil;
 }
 @end

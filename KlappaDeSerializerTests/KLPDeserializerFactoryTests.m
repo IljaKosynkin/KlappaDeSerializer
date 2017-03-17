@@ -17,6 +17,7 @@
 @end
 
 @implementation KLPFSimpleObject
+
 @end
 
 @interface KLPFThumbnail : NSObject
@@ -24,6 +25,10 @@
 @property NSString* url;
 @property NSString* height;
 @property NSString* width;
+
+@end
+
+@implementation KLPFThumbnail
 
 @end
 
@@ -51,7 +56,7 @@
 
 @end
 
-@interface KLPFNestedObjectWithArray : NSObject<KLPDeserializable>
+@interface KLPFNestedObjectWithArray : NSObject
 
 @property NSString* firstName;
 @property NSString* lastName;
@@ -65,10 +70,6 @@
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [KLPFPhone class]};
 }
-@end
-
-@implementation KLPFThumbnail
-
 @end
 
 @interface KLPAddressDeserializer : NSObject<KLPDeserializerProtocol>
