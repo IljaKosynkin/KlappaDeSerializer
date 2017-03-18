@@ -314,7 +314,8 @@ Basically, let consider that you have field "id" in your model class and you wan
 + (NSArray*) getRequiredFields {
     return @[@"id"];
 }
-```So, in this particular case, if KlappaInjector meet JSON that doesn't have "id" in it - it will return nil, even if the rest of fields is here.
+```
+So, in this particular case, if KlappaInjector meet JSON that doesn't have "id" in it - it will return nil, even if the rest of fields is here.
 
 # Contributing
 All contributions and feedback are very appreciated and welcomed. If you have some issues or questions how KlappaInjector works - you always can ask it in issues section or provide fix as Pull Request.
