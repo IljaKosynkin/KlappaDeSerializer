@@ -284,10 +284,37 @@ or
 ```objective-c
 NSArray* objects = [KLPDeserializer deserializeWithString:[KLPFNestedObject class] jsonString:json];
 ```
-# Custom name mapping
+# Custom fields mapping
 ## Naming strategies
 Naming strategy - is a class that decides how the name of field from JSON should be translated to the name of a class. 
 KlappaDeSerializer provides two strategies out of the box: KLPDefaultNamingStrategy and KLPExplicitNamingStrategy.
-Explicit naming strategy is translates field from JSON one-to-one. For example, if you have field named "awesome_field" 
+Explicit naming strategy is translates field from JSON one-to-one. For example, if you have field named "awesome_field" it will be translated to field "awesme_field" in the class. 
+Default naming strategy translates snake_case to camelCase, i.e. if you have field "awesome_field" in your JSON
 
+## Class-local fields mapping
+Sometimes you want to set custom mapping for one or two fields for one class and don't set it globally, as with naming strategies. In KlappaInjector you can achieve it by implementing function:
+```objective-c
++ (NSDictionary*) getCustomFieldsMapping;
+```
+In this function you define how one field will be translated to another. So lets assume you have field "super_puper_awesome_url" and in your model you want to put it into field called simply "url". In such case you can implement function in following way:
+```objective-c
++ (NSDictionary*) getCustomFieldsMapping {
+    return @{@"super_puper_awesome_url": @"url"};
+}
+```
+and you are free to go. 
 
+# Required properties
+It's quite common that in your network model you have some fields that are necessary for application to work and you don't want to pass objects that doesn't have those fields. KlappaInjector allows you to specify such required fields. In order to do so, you must implement function:
+```objective-c
++ (NSArray*) getRequiredFields;
+```
+Basically, let consider that you have field "id" in your model class and you want it to be present all the time. In such case, you should implement this function in a following way:
+```objective-c
++ (NSArray*) getRequiredFields {
+    return @[@"id"];
+}
+```So, in this particular case, if KlappaInjector meet JSON that doesn't have "id" in it - it will return nil, even if the rest of fields is here.
+
+# Contributing
+All contributions and feedback are very appreciated and welcomed. If you have some issues or questions how KlappaInjector works - you always can ask it in issues section or provide fix as Pull Request.
