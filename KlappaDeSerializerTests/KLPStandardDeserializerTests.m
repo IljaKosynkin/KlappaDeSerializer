@@ -32,6 +32,17 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
+@interface SimpleObject3 : NSObject
+@property NSString* ammo;
+@property NSDecimalNumber* price;
+@end
+
+@implementation SimpleObject3
++ (NSDictionary*) getCustomFieldsMapping {
+    return @{@"name": @"ammo"};
+}
+@end
+
 @interface Thumbnail : NSObject
 
 @property NSString* url;
@@ -262,6 +273,15 @@ static KLPStandardDeserializer* deserializer;
     SimpleObject* object = [deserializer deserialize:[SimpleObject class] json:jsonDict];
     
     XCTAssertNil(object);
+}
+
+- (void) testCustomFieldsMapping {
+    NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject"];
+    SimpleObject3* object = [deserializer deserialize:[SimpleObject3 class] json:jsonDict];
+    
+    XCTAssertNotNil(object);
+    XCTAssertTrue([object.ammo isEqualToString:@"A green door"]);
+    XCTAssertTrue([object.price isEqual:@12.50]);
 }
 
 @end

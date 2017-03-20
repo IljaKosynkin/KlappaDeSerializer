@@ -36,10 +36,15 @@ static NSString* separator = @"|\\o/|";
 - (id<KLPDeserializable>) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize {
     NSObject<KLPDeserializable>* object = [[classToDeserialize alloc] init];
     
+    NSDictionary* mappedFields = [classToDeserialize getCustomFieldsMapping];
     NSDictionary* fields = [_retriever getFields:object];
     
     for (NSString* key in jsonToDeserialize) {
-        NSString* translatedKey = [globalStrategy convertName:key];
+        NSString* translatedKey = mappedFields[key];
+        if (translatedKey == nil) {
+            translatedKey = [globalStrategy convertName:key];
+        }
+        
         if (fields[translatedKey] == nil) {
             continue;
         }
