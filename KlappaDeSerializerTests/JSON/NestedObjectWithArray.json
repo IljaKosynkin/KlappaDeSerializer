@@ -1,15 +1,15 @@
 {
-     "firstName": "John",
-     "lastName": "Smith",
+     "first_name": "John",
+     "last_name": "Smith",
      "age": 25,
      "address":
      {
-         "streetAddress": "21 2nd Street",
+         "street_address": "21 2nd Street",
          "city": "New York",
          "state": "NY",
-         "postalCode": "10021"
+         "postal_code": "10021"
      },
-     "phoneNumber":
+     "phone_number":
      [
          {
            "type": "home",

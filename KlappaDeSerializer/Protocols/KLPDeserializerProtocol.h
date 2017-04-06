@@ -13,8 +13,8 @@
 #import "KLPConvertedTypes.h"
 
 @protocol KLPDeserializerProtocol <NSObject>
-- (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy;
 - (id<KLPDeserializable>) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
-- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output;
-- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output;
+- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class) output;
+- (void) addValueConverterForPrimitive:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputType:(Type) output;
+- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class) type forOutputClass:(Class) output;
 @end

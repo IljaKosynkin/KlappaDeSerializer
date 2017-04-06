@@ -26,16 +26,14 @@ static id<KLPNamingStrategy> explicitStrategy;
 
 
 - (void)testDefaultStrategy {
-    NSString* fieldToTest1 = @"test_field";
+    NSString* fieldToTest1 = @"testField";
     NSString* fieldToTest2 = @"testField";
     NSString* fieldToTest3 = @"TestField";
-    NSString* fieldToTest4 = @"Test_Field";
-    NSString* correctField = @"testField";
+    NSString* correctField = @"test_field";
     
     XCTAssertTrue([[defaultStrategy convertName:fieldToTest1] isEqualToString:correctField]);
     XCTAssertTrue([[defaultStrategy convertName:fieldToTest2] isEqualToString:correctField]);
     XCTAssertTrue([[defaultStrategy convertName:fieldToTest3] isEqualToString:correctField]);
-    XCTAssertTrue([[defaultStrategy convertName:fieldToTest4] isEqualToString:correctField]);
 }
 
 - (void)testExplicitStrategy {

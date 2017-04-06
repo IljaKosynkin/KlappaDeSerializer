@@ -10,30 +10,24 @@
 
 @implementation KLPDefaultNamingStrategy
 
-- (NSString *)stringByReplacingSnakeCaseWithCamelCase:(NSString*) originalString {
-    NSArray *components = [originalString componentsSeparatedByString:@"_"];
-    NSMutableString *output = [NSMutableString string];
-    
-    for (NSUInteger i = 0; i < components.count; i++) {
-        if (i == 0) {
-            if (components.count == 1) {
-                NSString* fullString = components[i];
-                NSString* firstLetter = [[fullString substringToIndex:1] lowercaseString];
-                [output appendString:firstLetter];
-                [output appendString:[fullString substringFromIndex:1]];
-            } else {
-                [output appendString:[components[i] lowercaseString]];
-            }
-        } else {
-            [output appendString:[components[i] capitalizedString]];
+- (NSString *)stringByReplacingCamelCaseWithSnakeCase:(NSString *)string {
+    NSUInteger index = 1;
+    NSMutableString *snakeCaseString = [NSMutableString stringWithString:string];
+    NSUInteger length = snakeCaseString.length;
+    NSCharacterSet *characterSet = [NSCharacterSet uppercaseLetterCharacterSet];
+    while (index < length) {
+        if ([characterSet characterIsMember:[snakeCaseString characterAtIndex:index]]) {
+            [snakeCaseString insertString:@"_" atIndex:index];
+            index++;
         }
+        index++;
     }
     
-    return [NSString stringWithString:output];
+    return [snakeCaseString lowercaseString];
 }
 
 - (NSString*) convertName:(NSString*) originalName {
-    return [self stringByReplacingSnakeCaseWithCamelCase:originalName];
+    return [self stringByReplacingCamelCaseWithSnakeCase:originalName];
 }
 
 @end

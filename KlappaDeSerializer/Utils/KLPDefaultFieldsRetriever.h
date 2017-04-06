@@ -10,5 +10,5 @@
 #import "KLPFieldsRetriever.h"
 
 @interface KLPDefaultFieldsRetriever : NSObject<KLPFieldsRetriever>
-- (NSDictionary*) getFields:(id) object;
+- (NSDictionary*) getFields:(Class) forClass;
 @end

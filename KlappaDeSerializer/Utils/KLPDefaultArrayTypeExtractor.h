@@ -11,5 +11,5 @@
 #import "KLPArrayTypeExtractor.h"
 
 @interface KLPDefaultArrayTypeExtractor : NSObject<KLPArrayTypeExtractor>
-- (Class) getType:(NSObject<KLPDeserializable>*) object forField:(NSString*) fieldName;
+- (Class) getType:(Class<KLPDeserializable>) forClass forField:(NSString*) fieldName;
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KLPDeserializable.h"
 
 @protocol KLPArrayTypeExtractor <NSObject>
-- (Class) getType:(id<KLPDeserializable>) object forField:(NSString*) fieldName;
+- (Class) getType:(Class<KLPDeserializable>) forClass forField:(NSString*) fieldName;
 @end

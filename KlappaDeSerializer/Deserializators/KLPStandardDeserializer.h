@@ -13,6 +13,7 @@
 #import "KLPConvertedTypes.h"
 #import "KLPFieldsRetriever.h"
 #import "KLPArrayTypeExtractor.h"
+#import "KLPSchemaManager.h"
 
 @interface KLPStandardDeserializer : NSObject<KLPDeserializerProtocol> {
 
@@ -21,9 +22,9 @@
 @property id<KLPFieldsRetriever> retriever;
 @property id<KLPArrayTypeExtractor> extractor;
 
-- (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy;
-- (id<KLPDeserializable>) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
+- (NSObject<KLPDeserializable>*) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize;
 
-- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output;
-- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output;
+- (void) addValueConverterForPrimitive:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputType:(Type) output;
+- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class) output;
+- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class) type forOutputClass:(Class) output;
 @end

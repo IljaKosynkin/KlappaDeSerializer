@@ -11,77 +11,75 @@
 #import "KLPDefaultNamingStrategy.h"
 #import "KLPDefaultFieldsRetriever.h"
 #import "KLPDefaultArrayTypeExtractor.h"
+#import "KLPDefaultSchemaManager.h"
+#include "KLPCommonVariables.h"
 #import <objc/runtime.h>
 
 static NSString* separator = @"|\\o/|";
 
 @implementation KLPStandardDeserializer {
-    id<KLPNamingStrategy> globalStrategy;
-    NSMutableDictionary* converters;
+    struct Node* converters;
 }
 
 - (id) init {
     self = [super init];
-    globalStrategy = [[KLPDefaultNamingStrategy alloc] init];
-    converters = [[NSMutableDictionary alloc] init];
+    Node(root, '\0')
+    converters = root;
     _retriever = [[KLPDefaultFieldsRetriever alloc] init];
     _extractor = [[KLPDefaultArrayTypeExtractor alloc] init];
+    
+    
+    if (defaultManager == nil || defaultStrategy == nil) {
+        [KLPDeserializer performSelector: @selector(postInit)];
+    }
+    
     return self;
 }
 
-- (void) setGlobalNamingStrategy:(id<KLPNamingStrategy>) strategy {
-    globalStrategy = strategy;
-}
-
-- (id<KLPDeserializable>) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize {
+- (NSObject<KLPDeserializable>*) deserialize:(Class<KLPDeserializable>) classToDeserialize json:(NSDictionary*) jsonToDeserialize {
     NSObject<KLPDeserializable>* object = [[classToDeserialize alloc] init];
+    KLPObjectSchema* schema = [defaultManager retrieveSchema: classToDeserialize];
     
-    NSDictionary* mappedFields = [classToDeserialize getCustomFieldsMapping];
-    NSDictionary* fields = [_retriever getFields:object];
-    
-    for (NSString* key in jsonToDeserialize) {
-        NSString* translatedKey = mappedFields[key];
-        if (translatedKey == nil) {
-            translatedKey = [globalStrategy convertName:key];
-        }
-        
-        if (fields[translatedKey] == nil) {
+    for (NSString* key in schema.keys) {
+        struct Node* node = [schema getNodeForName:key];
+        if (node == NULL) {
             continue;
         }
         
-        id value = jsonToDeserialize[key];
-        NSString* type = fields[translatedKey];
-        if ([value isKindOfClass:[NSDictionary class]]) {
+        NSString* translatedKey = [NSString stringWithUTF8String:node->value->mapped_key];
+        NSString* type = [NSString stringWithUTF8String:node->value->value_type];
+        
+        id value = jsonToDeserialize[translatedKey];
+        if (value == nil) {
+            continue;
+        }
+        
+        if (node->value->field_type == OBJECT_FIELD_TYPE) {
             Class<KLPDeserializable> expectedClass = NSClassFromString(type);
             if (expectedClass == nil) {
                 [NSException raise:@"Class for field not found." format:@"Couldn't find class mapping for field %@", translatedKey];
             }
-            [object setValue:[KLPDeserializer deserializeWithDictionaryForField:expectedClass jsonDictionary:value field:key context: &classToDeserialize] forKey:translatedKey];
             
-        } else if ([value isKindOfClass:[NSArray class]]) {
-            Class<KLPDeserializable> expectedClass = [self.extractor getType:object forField:key];
+            [object setValue:[KLPDeserializer deserializeWithDictionaryForField:expectedClass jsonDictionary:value field:key context: &classToDeserialize] forKey:key];
+        } else if (node->value->field_type == ARRAY_FIELD_TYPE) {
+            Class<KLPDeserializable> expectedClass = NSClassFromString(type);
             if (expectedClass == nil) {
-                [object setValue:[KLPDeserializer deserializeWithArrayOfPrimitives:value] forKey:translatedKey];
+                [object setValue:value forKey:key];
             } else {
-                [object setValue:[KLPDeserializer deserializeWithArray:expectedClass array:value] forKey:translatedKey];
+                [object setValue:[KLPDeserializer deserializeWithArray:expectedClass array:value] forKey:key];
             }
         } else {
-            NSString* extendedKey = [key stringByAppendingString:[separator stringByAppendingString:NSStringFromClass([value class])]];
-            NSString* fullKey = [extendedKey stringByAppendingString:[separator stringByAppendingString:type]];
-            NSString* globalKey = [separator stringByAppendingString:NSStringFromClass([value class])];
-            globalKey = [globalKey stringByAppendingString:[separator stringByAppendingString:type]];
-            id<KLPValueConverter> converter = converters[fullKey];
-            if (converter == nil) {
-                converter = converters[extendedKey];
+            if (converters->descendants != NULL) {
+                NSString* inputType = NSStringFromClass([value class]);
+                NSString* fullKey = [[key stringByAppendingString:inputType] stringByAppendingString:type];
+                struct Node* node = find_node(converters, [fullKey cStringUsingEncoding:NSUTF8StringEncoding]);
+                if (node != NULL) {
+                    id<KLPValueConverter> converter = (__bridge id<KLPValueConverter>)(node->value->reference);
+                    value = [converter convert:value];
+                }
             }
-            if (converter == nil) {
-                converter = converters[key];
-            }
-            if (converter == nil) {
-                converter = converters[globalKey];
-            }
-            value = converter == nil ? value : [converter convert:value];
-            [object setValue:value forKey:translatedKey];
+            
+            [object setValue:value forKey:key];
         }
     }
     
@@ -107,33 +105,42 @@ static NSString* separator = @"|\\o/|";
     }
 }
 
-- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class*) output {
-    if (fieldName == nil && output == nil) {
-        [NSException raise:@"You didn't provide enough data for registration." format:@""];
-    }
+- (void) addValueConverterForPrimitive:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputType:(Type) output {
+    NSArray* inputTypes = [self getValueOfType:type];
+    NSArray* outputTypes = [self getValueOfType:output];
     
-    NSArray* types = [self getValueOfType:type];
-    for (NSString* type in types) {
-        NSString* field = fieldName == nil ? @"" : fieldName;
-        NSString* key = [field stringByAppendingString:[separator stringByAppendingString: type]];
-        NSString* outputType = output == nil ? @"" : [separator stringByAppendingString: NSStringFromClass(*output)];
-        key = [key stringByAppendingString: outputType];
-        converters[key] = converter;
+    for (NSString* input in inputTypes) {
+        for (NSString* output in outputTypes) {
+            NSString* fullKey = [[fieldName stringByAppendingString:input] stringByAppendingString:output];
+            
+            const char* key = transfer([fullKey cStringUsingEncoding:NSUTF8StringEncoding]);
+            Value(converterValue, key, OBJECT_FIELD_TYPE, "", 1)
+            converterValue->reference = CFBridgingRetain(converter);
+            add_field(converters, converterValue);
+        }
     }
 }
 
-- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class*) type forOutputClass:(Class*) output {
-    NSString* field = fieldName == nil ? @"" : fieldName;
-    NSString* inputType = type == nil ? @"" : [separator stringByAppendingString: NSStringFromClass(*type)];
-    NSString* outputType = output == nil ? @"" : [separator stringByAppendingString: NSStringFromClass(*output)];
-    
-    NSString* key = [field stringByAppendingString:inputType];
-    key = [key stringByAppendingString: outputType];
-    if ([key length] == 0) {
-        [NSException raise:@"You didn't provide any data for registration. Give either fieldName or input and output class or both" format:@""];
+- (void) addValueConverter:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forInputType:(Type) type forOutputClass:(Class) output {
+    NSArray* types = [self getValueOfType:type];
+    NSString* outputType = NSStringFromClass(output);
+    for (NSString* type in types) {
+        NSString* fullKey = [[fieldName stringByAppendingString:type] stringByAppendingString:outputType];
+        const char* key = transfer([fullKey cStringUsingEncoding:NSUTF8StringEncoding]);
+        Value(converterValue, key, OBJECT_FIELD_TYPE, "", 1)
+        converterValue->reference = CFBridgingRetain(converter);
+        add_field(converters, converterValue);
     }
-    
-    converters[key] = converter;
+}
+
+- (void) addValueConverterForCustomClass:(id<KLPValueConverter>) converter forField:(NSString*) fieldName forCustomClass:(Class) type forOutputClass:(Class) output {
+    NSString* inputType = NSStringFromClass(type);
+    NSString* outputType = NSStringFromClass(output);
+    NSString* fullKey = [[fieldName stringByAppendingString:inputType] stringByAppendingString:outputType];
+    const char* key = transfer([fullKey cStringUsingEncoding:NSUTF8StringEncoding]);
+    Value(converterValue, key, OBJECT_FIELD_TYPE, "", 1)
+    converterValue->reference = CFBridgingRetain(converter);
+    add_field(converters, converterValue);
 }
 
 @end

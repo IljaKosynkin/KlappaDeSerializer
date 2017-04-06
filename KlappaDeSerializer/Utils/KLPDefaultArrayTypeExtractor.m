@@ -9,8 +9,8 @@
 #import "KLPDefaultArrayTypeExtractor.h"
 
 @implementation KLPDefaultArrayTypeExtractor
-- (Class) getType:(NSObject<KLPDeserializable>*) object forField:(NSString*) fieldName {
-    NSDictionary* dictionary = [[object class] getFieldsToClassMap];
+- (Class) getType:(Class<KLPDeserializable>) forClass forField:(NSString*) fieldName {
+    NSDictionary* dictionary = [forClass getFieldsToClassMap];
     return dictionary[fieldName];
 }
 @end

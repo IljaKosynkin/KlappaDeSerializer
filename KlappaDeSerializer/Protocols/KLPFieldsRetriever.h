@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol KLPFieldsRetriever <NSObject>
-- (NSDictionary*) getFields:(id) object;
+- (NSDictionary*) getFields:(Class) forClass;
 @end

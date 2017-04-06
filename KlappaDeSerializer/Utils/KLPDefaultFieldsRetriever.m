@@ -7,24 +7,22 @@
 //
 
 #import "KLPDefaultFieldsRetriever.h"
+#include "KLPStateMachine.h"
 #import <objc/runtime.h>
+
+static struct StateMachine* machine = NULL;
 
 @implementation KLPDefaultFieldsRetriever
 
-- (NSString*) extractSwiftRepresentation:(NSString*) type {
-    NSString* regString = @"_Tt.[0-9]+(.+)[0-9]+(.+)";
-    NSRegularExpression* extraction = [NSRegularExpression regularExpressionWithPattern:regString options:0 error:NULL];
-    
-    NSArray* matches = [extraction matchesInString:type options:0 range:NSMakeRange(0, [type length])];
-    NSTextCheckingResult* matchesResult = [matches objectAtIndex:0];
-    
-    NSRange nameRange = [matchesResult rangeAtIndex:1];
-    NSRange classRange = [matchesResult rangeAtIndex:2];
-    
-    NSString* projectName = [type substringWithRange:nameRange];
-    NSString* className = [type substringWithRange:classRange];
-    
-    return [[projectName stringByAppendingString:@"."] stringByAppendingString:className];
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        if (machine == NULL) {
+            machine = create_machine_for_type_extraction();
+        }
+    }
+    return self;
 }
 
 - (void) getFieldsOfClass:(Class)class fields:(NSMutableDictionary**) fieldsMap {
@@ -34,40 +32,23 @@
     for (int i = 0; i < count; i++) {
         objc_property_t property = props[i];
         
-        NSString * name = [NSString stringWithUTF8String: property_getName(property)];
-        NSString * type = [NSString stringWithUTF8String: property_getAttributes(property)];
-            
-        NSArray * attributes = [type componentsSeparatedByString:@"\""];
-        NSString * parsedType;
-        if ([attributes count] > 1) {
-            parsedType = [attributes objectAtIndex:1];
-            parsedType = [[parsedType componentsSeparatedByString:@"\""] objectAtIndex:0];
-        } else {
-            attributes = [type componentsSeparatedByString:@","];
-            parsedType = [attributes objectAtIndex:0];
-            parsedType = [parsedType substringFromIndex:1];
-        }
+        const char* name = property_getName(property);
+        const char* type = property_getAttributes(property);
         
-        NSRegularExpression* protocolCheck = [NSRegularExpression regularExpressionWithPattern:@".*<(.*)>.*" options:NSRegularExpressionCaseInsensitive error:nil];
-        NSTextCheckingResult *result = [protocolCheck firstMatchInString:parsedType options:NSMatchingReportCompletion range:NSMakeRange(0, parsedType.length)];
-        if ([result numberOfRanges] > 0) {
-            parsedType = [parsedType substringWithRange:[result rangeAtIndex:1]];
-        }
-            
-        if ([parsedType hasPrefix:@"_Tt"]) {
-            parsedType = [self extractSwiftRepresentation:parsedType];
-        }
+        const char* extracted = extract_type(machine, type);
         
-        (*fieldsMap)[name] = parsedType;
+        NSString* stringName = [NSString stringWithUTF8String:name];
+        NSString* stringType = [[NSString alloc] initWithBytesNoCopy:(void*) extracted length:strlen(extracted) encoding:NSUTF8StringEncoding freeWhenDone:YES];
+        (*fieldsMap)[stringName] = stringType;
     }
     
     free(props);
 }
 
-- (NSDictionary*) getFields:(id) object; {
+- (NSDictionary*) getFields:(Class) forClass {
     NSMutableDictionary* fields = [[NSMutableDictionary alloc] init];
     
-    Class currentClass = [object class];
+    Class currentClass = forClass;
     while (YES) {
         [self getFieldsOfClass:currentClass fields:&fields];
         currentClass = [currentClass superclass];

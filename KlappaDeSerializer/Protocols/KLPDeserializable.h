@@ -7,31 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KLPNamingStrategy.h"
 
 @protocol KLPDeserializable
 + (id) alloc;
 - (id) init;
 
++ (id<KLPNamingStrategy>) getNamingStrategy;
+
 + (NSDictionary*) getFieldsToClassMap;
 + (NSDictionary*) getCustomFieldsMapping;
 + (NSArray*) getRequiredFields;
-@end
-
-@interface NSObject(KLPDeserializableCategory) <KLPDeserializable>
-
-@end
-
-@implementation NSObject(KLPDeserializableCategory)
-+ (NSDictionary*) getFieldsToClassMap {
-    return nil;
-}
-
-+ (NSDictionary*) getCustomFieldsMapping {
-    return nil;
-}
-
-
-+ (NSArray*) getRequiredFields {
-    return nil;
-}
 @end

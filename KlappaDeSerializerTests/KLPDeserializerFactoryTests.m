@@ -10,8 +10,9 @@
 #import "KLPDeserializer.h"
 #import "KLPStandardDeserializer.h"
 #import "KLPExplicitNamingStrategy.h"
+#include "KLPAncestor.h"
 
-@interface KLPFSimpleObject : NSObject
+@interface KLPFSimpleObject : KLPAncestor
 @property NSString* name;
 @property NSDecimalNumber* price;
 @end
@@ -20,7 +21,7 @@
 
 @end
 
-@interface KLPFThumbnail : NSObject
+@interface KLPFThumbnail : KLPAncestor
 
 @property NSString* url;
 @property NSString* height;
@@ -32,7 +33,7 @@
 
 @end
 
-@interface KLPFAddress : NSObject
+@interface KLPFAddress : KLPAncestor
 
 @property NSString* streetAddress;
 @property NSString* city;
@@ -45,7 +46,7 @@
 
 @end
 
-@interface KLPFPhone : NSObject
+@interface KLPFPhone : KLPAncestor
 
 @property NSString* type;
 @property NSString* number;
@@ -56,7 +57,7 @@
 
 @end
 
-@interface KLPFNestedObjectWithArray : NSObject
+@interface KLPFNestedObjectWithArray : KLPAncestor
 
 @property NSString* firstName;
 @property NSString* lastName;
@@ -67,9 +68,22 @@
 @end
 
 @implementation KLPFNestedObjectWithArray
+
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [KLPFPhone class]};
 }
+
+@end
+
+@interface KLPFObjectWithArrayOfPrimitives : KLPAncestor
+
+@property NSArray* ints;
+@property NSArray* strings;
+
+@end
+
+@implementation KLPFObjectWithArrayOfPrimitives
+
 @end
 
 @interface KLPAddressDeserializer : NSObject<KLPDeserializerProtocol>
@@ -96,7 +110,7 @@
 
 @end
 
-@interface KLPFNestedObject : NSObject
+@interface KLPFNestedObject : KLPAncestor
 
 @property NSString* title;
 @property NSString* summary;
@@ -195,5 +209,41 @@
     XCTAssertTrue([object.address.state isEqualToString:@"a"]);
 }
 
+- (void) testArrayOfPrimitives {
+    NSString* json = [self getJsonFile:@"PrimitiveArray"];
+    
+    NSArray* primitives = [KLPDeserializer deserializeWithArrayOfPrimitives:json];
+    
+    XCTAssertEqual(primitives.count, 3);
+    
+    NSString* first = primitives[0];
+    XCTAssertTrue([first isEqualToString:@"aaa"]);
+    
+    NSString* second = primitives[1];
+    XCTAssertTrue([second isEqualToString:@"bbb"]);
+    
+    NSString* third = primitives[2];
+    XCTAssertTrue([third isEqualToString:@"ccc"]);
+}
 
+- (void) testObjectWithArrayOfPrimitives {
+    NSString* json = [self getJsonFile:@"ObjectWithArrayOfPrimitives"];
+    
+    KLPFObjectWithArrayOfPrimitives* obj = [KLPDeserializer deserializeWithString:[KLPFObjectWithArrayOfPrimitives class] jsonString:json];
+    
+    XCTAssertNotNil(obj);
+    
+    XCTAssertEqual(obj.ints.count, 3);
+    XCTAssertEqual([obj.ints[0] intValue], 1);
+    XCTAssertEqual([obj.ints[1] intValue], 2);
+    XCTAssertEqual([obj.ints[2] intValue], 3);
+    
+    XCTAssertEqual(obj.strings.count, 2);
+    
+    NSString* first = obj.strings[0];
+    XCTAssertTrue([first isEqualToString:@"aa"]);
+    
+    NSString* second = obj.strings[1];
+    XCTAssertTrue([second isEqualToString:@"vv"]);
+}
 @end

@@ -25,19 +25,36 @@
 		5F03962F1E4070FC00BA7E42 /* KLPStringToURLConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F03962D1E4070FC00BA7E42 /* KLPStringToURLConverter.m */; };
 		5F046CD71E508A0F00B23792 /* KLPStringToDecimalNumberConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F046CD51E508A0F00B23792 /* KLPStringToDecimalNumberConverter.h */; };
 		5F046CD81E508A0F00B23792 /* KLPStringToDecimalNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F046CD61E508A0F00B23792 /* KLPStringToDecimalNumberConverter.m */; };
+		5F04DA8C1E8AFB9200CFBFEE /* Large.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F04DA8B1E8AFB9200CFBFEE /* Large.json */; };
+		5F04DA8E1E8AFBB000CFBFEE /* KLPPerformanceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F04DA8D1E8AFBB000CFBFEE /* KLPPerformanceTests.m */; };
+		5F063D7E1E81730900CB5DA5 /* KLPMultidimensionalTree.c in Sources */ = {isa = PBXBuildFile; fileRef = 5F063D7C1E81730900CB5DA5 /* KLPMultidimensionalTree.c */; };
+		5F063D7F1E81730900CB5DA5 /* KLPMultidimensionalTree.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F063D7D1E81730900CB5DA5 /* KLPMultidimensionalTree.h */; };
 		5F069AC21E50FE5F00F6F58E /* KLPStringToNumberConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F069AC01E50FE5F00F6F58E /* KLPStringToNumberConverter.h */; };
 		5F069AC31E50FE6000F6F58E /* KLPStringToNumberConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F069AC11E50FE5F00F6F58E /* KLPStringToNumberConverter.m */; };
+		5F0709251E827E8200BE6087 /* KLPTreeLevelList.c in Sources */ = {isa = PBXBuildFile; fileRef = 5F0709231E827E8200BE6087 /* KLPTreeLevelList.c */; };
+		5F0709261E827E8200BE6087 /* KLPTreeLevelList.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0709241E827E8200BE6087 /* KLPTreeLevelList.h */; };
+		5F0709291E828F3400BE6087 /* KLPDefaultSchemaManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F0709271E828F3400BE6087 /* KLPDefaultSchemaManager.h */; };
+		5F07092A1E828F3400BE6087 /* KLPDefaultSchemaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F0709281E828F3400BE6087 /* KLPDefaultSchemaManager.m */; };
 		5F07EB781E388E2300B1DD7A /* KLPDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F07EB761E388E2300B1DD7A /* KLPDeserializer.h */; };
 		5F07EB791E388E2300B1DD7A /* KLPDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F07EB771E388E2300B1DD7A /* KLPDeserializer.m */; };
 		5F08A0DE1E3D42A500056C51 /* SimpleObject2.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */; };
 		5F08A0E01E3D45A200056C51 /* KLPStrategiesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */; };
 		5F08A0E21E3D69BC00056C51 /* KLPDeserializerFactoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */; };
+		5F10AF3D1E8101D9007BD35A /* KLPObjectSchema.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F10AF3B1E8101D9007BD35A /* KLPObjectSchema.h */; };
+		5F10AF3E1E8101D9007BD35A /* KLPObjectSchema.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F10AF3C1E8101D9007BD35A /* KLPObjectSchema.m */; };
+		5F10AF401E810888007BD35A /* KLPSchemaManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F10AF3F1E810888007BD35A /* KLPSchemaManager.h */; };
 		5F12E6D01E3515B400A5D59D /* KlappaDeSerializer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F12E6C61E3515B400A5D59D /* KlappaDeSerializer.framework */; };
 		5F12E6D51E3515B400A5D59D /* KLPStandardDeserializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F12E6D41E3515B400A5D59D /* KLPStandardDeserializerTests.m */; };
 		5F12E6D71E3515B400A5D59D /* KlappaDeSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F12E6C91E3515B400A5D59D /* KlappaDeSerializer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5F1322751E47A23E0071401C /* KLPDefaultArrayTypeExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F1322731E47A23E0071401C /* KLPDefaultArrayTypeExtractor.h */; };
 		5F1322761E47A23E0071401C /* KLPDefaultArrayTypeExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F1322741E47A23E0071401C /* KLPDefaultArrayTypeExtractor.m */; };
 		5F1322781E47A3AD0071401C /* KLPArrayTypeExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F1322771E47A3AD0071401C /* KLPArrayTypeExtractor.h */; };
+		5F16EF381E8BA36100702757 /* KLPStateMachine.c in Sources */ = {isa = PBXBuildFile; fileRef = 5F16EF361E8BA36100702757 /* KLPStateMachine.c */; };
+		5F16EF391E8BA36100702757 /* KLPStateMachine.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F16EF371E8BA36100702757 /* KLPStateMachine.h */; };
+		5F26E15D1E923A1800F0E179 /* KLPAncestor.h in Headers */ = {isa = PBXBuildFile; fileRef = 5F26E15B1E923A1800F0E179 /* KLPAncestor.h */; };
+		5F26E15E1E923A1800F0E179 /* KLPAncestor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F26E15C1E923A1800F0E179 /* KLPAncestor.m */; };
+		5F26E1611E9258EC00F0E179 /* ObjectWithArrayOfPrimitives.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F26E15F1E9258EC00F0E179 /* ObjectWithArrayOfPrimitives.json */; };
+		5F26E1621E9258EC00F0E179 /* PrimitiveArray.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F26E1601E9258EC00F0E179 /* PrimitiveArray.json */; };
 		5F4294DB1E7C5D6B00794181 /* SimpleObject3.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F4294DA1E7C5D6B00794181 /* SimpleObject3.json */; };
 		5F912D3C1E3AA6F2007AB67F /* Array.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D381E3AA6F2007AB67F /* Array.json */; };
 		5F912D3D1E3AA6F2007AB67F /* NestedObject.json in Resources */ = {isa = PBXBuildFile; fileRef = 5F912D391E3AA6F2007AB67F /* NestedObject.json */; };
@@ -74,13 +91,26 @@
 		5F03962D1E4070FC00BA7E42 /* KLPStringToURLConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStringToURLConverter.m; sourceTree = "<group>"; };
 		5F046CD51E508A0F00B23792 /* KLPStringToDecimalNumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPStringToDecimalNumberConverter.h; sourceTree = "<group>"; };
 		5F046CD61E508A0F00B23792 /* KLPStringToDecimalNumberConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStringToDecimalNumberConverter.m; sourceTree = "<group>"; };
+		5F04DA8B1E8AFB9200CFBFEE /* Large.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Large.json; sourceTree = "<group>"; };
+		5F04DA8D1E8AFBB000CFBFEE /* KLPPerformanceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPPerformanceTests.m; sourceTree = "<group>"; };
+		5F04DA8F1E8B082B00CFBFEE /* KLPCommonVariables.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLPCommonVariables.h; sourceTree = "<group>"; };
+		5F063D7C1E81730900CB5DA5 /* KLPMultidimensionalTree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KLPMultidimensionalTree.c; sourceTree = "<group>"; };
+		5F063D7D1E81730900CB5DA5 /* KLPMultidimensionalTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPMultidimensionalTree.h; sourceTree = "<group>"; };
+		5F063D861E818A1E00CB5DA5 /* KLPStructures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLPStructures.h; sourceTree = "<group>"; };
 		5F069AC01E50FE5F00F6F58E /* KLPStringToNumberConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPStringToNumberConverter.h; sourceTree = "<group>"; };
 		5F069AC11E50FE5F00F6F58E /* KLPStringToNumberConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStringToNumberConverter.m; sourceTree = "<group>"; };
+		5F0709231E827E8200BE6087 /* KLPTreeLevelList.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KLPTreeLevelList.c; sourceTree = "<group>"; };
+		5F0709241E827E8200BE6087 /* KLPTreeLevelList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPTreeLevelList.h; sourceTree = "<group>"; };
+		5F0709271E828F3400BE6087 /* KLPDefaultSchemaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDefaultSchemaManager.h; sourceTree = "<group>"; };
+		5F0709281E828F3400BE6087 /* KLPDefaultSchemaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDefaultSchemaManager.m; sourceTree = "<group>"; };
 		5F07EB761E388E2300B1DD7A /* KLPDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDeserializer.h; sourceTree = "<group>"; };
 		5F07EB771E388E2300B1DD7A /* KLPDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDeserializer.m; sourceTree = "<group>"; };
 		5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SimpleObject2.json; sourceTree = "<group>"; };
 		5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPStrategiesTest.m; sourceTree = "<group>"; };
 		5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDeserializerFactoryTests.m; sourceTree = "<group>"; };
+		5F10AF3B1E8101D9007BD35A /* KLPObjectSchema.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPObjectSchema.h; sourceTree = "<group>"; };
+		5F10AF3C1E8101D9007BD35A /* KLPObjectSchema.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPObjectSchema.m; sourceTree = "<group>"; };
+		5F10AF3F1E810888007BD35A /* KLPSchemaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPSchemaManager.h; sourceTree = "<group>"; };
 		5F12E6C61E3515B400A5D59D /* KlappaDeSerializer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KlappaDeSerializer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F12E6C91E3515B400A5D59D /* KlappaDeSerializer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KlappaDeSerializer.h; sourceTree = "<group>"; };
 		5F12E6CA1E3515B400A5D59D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -90,6 +120,12 @@
 		5F1322731E47A23E0071401C /* KLPDefaultArrayTypeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPDefaultArrayTypeExtractor.h; sourceTree = "<group>"; };
 		5F1322741E47A23E0071401C /* KLPDefaultArrayTypeExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPDefaultArrayTypeExtractor.m; sourceTree = "<group>"; };
 		5F1322771E47A3AD0071401C /* KLPArrayTypeExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPArrayTypeExtractor.h; sourceTree = "<group>"; };
+		5F16EF361E8BA36100702757 /* KLPStateMachine.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = KLPStateMachine.c; sourceTree = "<group>"; };
+		5F16EF371E8BA36100702757 /* KLPStateMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPStateMachine.h; sourceTree = "<group>"; };
+		5F26E15B1E923A1800F0E179 /* KLPAncestor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLPAncestor.h; sourceTree = "<group>"; };
+		5F26E15C1E923A1800F0E179 /* KLPAncestor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLPAncestor.m; sourceTree = "<group>"; };
+		5F26E15F1E9258EC00F0E179 /* ObjectWithArrayOfPrimitives.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithArrayOfPrimitives.json; sourceTree = "<group>"; };
+		5F26E1601E9258EC00F0E179 /* PrimitiveArray.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PrimitiveArray.json; sourceTree = "<group>"; };
 		5F4294DA1E7C5D6B00794181 /* SimpleObject3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SimpleObject3.json; sourceTree = "<group>"; };
 		5F912D381E3AA6F2007AB67F /* Array.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Array.json; sourceTree = "<group>"; };
 		5F912D391E3AA6F2007AB67F /* NestedObject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NestedObject.json; sourceTree = "<group>"; };
@@ -134,6 +170,7 @@
 				5F0396121E406F3A00BA7E42 /* KLPNamingStrategy.h */,
 				5F0396131E406F3A00BA7E42 /* KLPValueConverter.h */,
 				5F1322771E47A3AD0071401C /* KLPArrayTypeExtractor.h */,
+				5F10AF3F1E810888007BD35A /* KLPSchemaManager.h */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -157,6 +194,8 @@
 				5F03961C1E406F3A00BA7E42 /* KLPDefaultFieldsRetriever.m */,
 				5F1322731E47A23E0071401C /* KLPDefaultArrayTypeExtractor.h */,
 				5F1322741E47A23E0071401C /* KLPDefaultArrayTypeExtractor.m */,
+				5F26E15B1E923A1800F0E179 /* KLPAncestor.h */,
+				5F26E15C1E923A1800F0E179 /* KLPAncestor.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -172,6 +211,37 @@
 				5F069AC11E50FE5F00F6F58E /* KLPStringToNumberConverter.m */,
 			);
 			path = Converters;
+			sourceTree = "<group>";
+		};
+		5F063D851E818A1600CB5DA5 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				5F063D861E818A1E00CB5DA5 /* KLPStructures.h */,
+				5F04DA8F1E8B082B00CFBFEE /* KLPCommonVariables.h */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
+		5F10AF3A1E8101BD007BD35A /* Schema */ = {
+			isa = PBXGroup;
+			children = (
+				5F10AF3B1E8101D9007BD35A /* KLPObjectSchema.h */,
+				5F10AF3C1E8101D9007BD35A /* KLPObjectSchema.m */,
+				5F0709271E828F3400BE6087 /* KLPDefaultSchemaManager.h */,
+				5F0709281E828F3400BE6087 /* KLPDefaultSchemaManager.m */,
+			);
+			path = Schema;
+			sourceTree = "<group>";
+		};
+		5F10AF421E8140CB007BD35A /* Multidimensional Tree */ = {
+			isa = PBXGroup;
+			children = (
+				5F063D7D1E81730900CB5DA5 /* KLPMultidimensionalTree.h */,
+				5F063D7C1E81730900CB5DA5 /* KLPMultidimensionalTree.c */,
+				5F0709241E827E8200BE6087 /* KLPTreeLevelList.h */,
+				5F0709231E827E8200BE6087 /* KLPTreeLevelList.c */,
+			);
+			path = "Multidimensional Tree";
 			sourceTree = "<group>";
 		};
 		5F12E6BC1E3515B400A5D59D = {
@@ -195,6 +265,10 @@
 		5F12E6C81E3515B400A5D59D /* KlappaDeSerializer */ = {
 			isa = PBXGroup;
 			children = (
+				5F16EF351E8BA34D00702757 /* State Machine Extractor */,
+				5F063D851E818A1600CB5DA5 /* Structures */,
+				5F10AF421E8140CB007BD35A /* Multidimensional Tree */,
+				5F10AF3A1E8101BD007BD35A /* Schema */,
 				5F03960B1E406F3A00BA7E42 /* Deserializators */,
 				5F03962B1E406F6300BA7E42 /* Converters */,
 				5F03960E1E406F3A00BA7E42 /* Protocols */,
@@ -216,19 +290,32 @@
 				5F08A0DF1E3D45A200056C51 /* KLPStrategiesTest.m */,
 				5F12E6D41E3515B400A5D59D /* KLPStandardDeserializerTests.m */,
 				5F08A0E11E3D69BC00056C51 /* KLPDeserializerFactoryTests.m */,
+				5F04DA8D1E8AFBB000CFBFEE /* KLPPerformanceTests.m */,
 			);
 			path = KlappaDeSerializerTests;
+			sourceTree = "<group>";
+		};
+		5F16EF351E8BA34D00702757 /* State Machine Extractor */ = {
+			isa = PBXGroup;
+			children = (
+				5F16EF371E8BA36100702757 /* KLPStateMachine.h */,
+				5F16EF361E8BA36100702757 /* KLPStateMachine.c */,
+			);
+			path = "State Machine Extractor";
 			sourceTree = "<group>";
 		};
 		5F912D371E3A8DF7007AB67F /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				5F04DA8B1E8AFB9200CFBFEE /* Large.json */,
 				5F912D381E3AA6F2007AB67F /* Array.json */,
 				5F912D391E3AA6F2007AB67F /* NestedObject.json */,
 				5F912D3A1E3AA6F2007AB67F /* NestedObjectWithArray.json */,
 				5F912D3B1E3AA6F2007AB67F /* SimpleObject.json */,
 				5F08A0DD1E3D42A500056C51 /* SimpleObject2.json */,
 				5F4294DA1E7C5D6B00794181 /* SimpleObject3.json */,
+				5F26E15F1E9258EC00F0E179 /* ObjectWithArrayOfPrimitives.json */,
+				5F26E1601E9258EC00F0E179 /* PrimitiveArray.json */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -240,6 +327,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F16EF391E8BA36100702757 /* KLPStateMachine.h in Headers */,
 				5F0396291E406F3A00BA7E42 /* KLPDefaultFieldsRetriever.h in Headers */,
 				5F0396211E406F3A00BA7E42 /* KLPFieldsRetriever.h in Headers */,
 				5F069AC21E50FE5F00F6F58E /* KLPStringToNumberConverter.h in Headers */,
@@ -248,13 +336,19 @@
 				5F0396221E406F3A00BA7E42 /* KLPNamingStrategy.h in Headers */,
 				5F0396281E406F3A00BA7E42 /* KLPConvertedTypes.h in Headers */,
 				5F1322751E47A23E0071401C /* KLPDefaultArrayTypeExtractor.h in Headers */,
+				5F26E15D1E923A1800F0E179 /* KLPAncestor.h in Headers */,
+				5F10AF3D1E8101D9007BD35A /* KLPObjectSchema.h in Headers */,
 				5F0396241E406F3A00BA7E42 /* KLPDefaultNamingStrategy.h in Headers */,
+				5F0709261E827E8200BE6087 /* KLPTreeLevelList.h in Headers */,
 				5F03961D1E406F3A00BA7E42 /* KLPStandardDeserializer.h in Headers */,
 				5F0396201E406F3A00BA7E42 /* KLPDeserializerProtocol.h in Headers */,
 				5F046CD71E508A0F00B23792 /* KLPStringToDecimalNumberConverter.h in Headers */,
 				5F0396231E406F3A00BA7E42 /* KLPValueConverter.h in Headers */,
 				5F0396261E406F3A00BA7E42 /* KLPExplicitNamingStrategy.h in Headers */,
+				5F10AF401E810888007BD35A /* KLPSchemaManager.h in Headers */,
+				5F063D7F1E81730900CB5DA5 /* KLPMultidimensionalTree.h in Headers */,
 				5F07EB781E388E2300B1DD7A /* KLPDeserializer.h in Headers */,
+				5F0709291E828F3400BE6087 /* KLPDefaultSchemaManager.h in Headers */,
 				5F03962E1E4070FC00BA7E42 /* KLPStringToURLConverter.h in Headers */,
 				5F12E6D71E3515B400A5D59D /* KlappaDeSerializer.h in Headers */,
 			);
@@ -352,10 +446,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F912D3E1E3AA6F2007AB67F /* NestedObjectWithArray.json in Resources */,
+				5F04DA8C1E8AFB9200CFBFEE /* Large.json in Resources */,
 				5F912D3C1E3AA6F2007AB67F /* Array.json in Resources */,
 				5F912D3F1E3AA6F2007AB67F /* SimpleObject.json in Resources */,
 				5F912D3D1E3AA6F2007AB67F /* NestedObject.json in Resources */,
 				5F4294DB1E7C5D6B00794181 /* SimpleObject3.json in Resources */,
+				5F26E1621E9258EC00F0E179 /* PrimitiveArray.json in Resources */,
+				5F26E1611E9258EC00F0E179 /* ObjectWithArrayOfPrimitives.json in Resources */,
 				5F08A0DE1E3D42A500056C51 /* SimpleObject2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,11 +464,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F26E15E1E923A1800F0E179 /* KLPAncestor.m in Sources */,
 				5F0396271E406F3A00BA7E42 /* KLPExplicitNamingStrategy.m in Sources */,
+				5F07092A1E828F3400BE6087 /* KLPDefaultSchemaManager.m in Sources */,
 				5F07EB791E388E2300B1DD7A /* KLPDeserializer.m in Sources */,
+				5F16EF381E8BA36100702757 /* KLPStateMachine.c in Sources */,
 				5F1322761E47A23E0071401C /* KLPDefaultArrayTypeExtractor.m in Sources */,
+				5F063D7E1E81730900CB5DA5 /* KLPMultidimensionalTree.c in Sources */,
 				5F03962A1E406F3A00BA7E42 /* KLPDefaultFieldsRetriever.m in Sources */,
 				5F069AC31E50FE6000F6F58E /* KLPStringToNumberConverter.m in Sources */,
+				5F0709251E827E8200BE6087 /* KLPTreeLevelList.c in Sources */,
+				5F10AF3E1E8101D9007BD35A /* KLPObjectSchema.m in Sources */,
 				5F0396251E406F3A00BA7E42 /* KLPDefaultNamingStrategy.m in Sources */,
 				5F03962F1E4070FC00BA7E42 /* KLPStringToURLConverter.m in Sources */,
 				5F03961E1E406F3A00BA7E42 /* KLPStandardDeserializer.m in Sources */,
@@ -383,6 +486,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F04DA8E1E8AFBB000CFBFEE /* KLPPerformanceTests.m in Sources */,
 				5F08A0E01E3D45A200056C51 /* KLPStrategiesTest.m in Sources */,
 				5F08A0E21E3D69BC00056C51 /* KLPDeserializerFactoryTests.m in Sources */,
 				5F12E6D51E3515B400A5D59D /* KLPStandardDeserializerTests.m in Sources */,

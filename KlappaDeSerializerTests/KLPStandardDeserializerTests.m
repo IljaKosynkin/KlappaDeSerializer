@@ -9,41 +9,50 @@
 #import <XCTest/XCTest.h>
 #import "KLPStandardDeserializer.h"
 #import "KLPExplicitNamingStrategy.h"
+#import "KLPDefaultNamingStrategy.h"
+#import "KLPDeserializer.h"
+#import "KLPAncestor.h"
 
 static KLPStandardDeserializer* deserializer;
 
-@interface SimpleObject : NSObject
+@interface SimpleObject : KLPAncestor
 @property NSString* name;
 @property NSDecimalNumber* price;
 @end
 
 @implementation SimpleObject
+
 + (NSArray*) getRequiredFields {
     return @[@"name"];
 }
+
 @end
 
-@interface SimpleObject2 : NSObject
+@interface SimpleObject2 : KLPAncestor
 @property NSString* Name;
 @property NSDecimalNumber* Price;
 @end
 
 @implementation SimpleObject2
-
++ (id<KLPNamingStrategy>) getNamingStrategy {
+    return [[KLPExplicitNamingStrategy alloc] init];
+}
 @end
 
-@interface SimpleObject3 : NSObject
+@interface SimpleObject3 : KLPAncestor
 @property NSString* ammo;
 @property NSDecimalNumber* price;
 @end
 
 @implementation SimpleObject3
+
 + (NSDictionary*) getCustomFieldsMapping {
-    return @{@"name": @"ammo"};
+    return @{@"ammo": @"name"};
 }
+
 @end
 
-@interface Thumbnail : NSObject
+@interface Thumbnail : KLPAncestor
 
 @property NSString* url;
 @property NSString* height;
@@ -55,7 +64,7 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface NestedObject : NSObject
+@interface NestedObject : KLPAncestor
 
 @property NSString* title;
 @property NSString* summary;
@@ -74,13 +83,13 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface NestedObjectCustomTypeMapping : NSObject
+@interface NestedObjectCustomTypeMapping : KLPAncestor
 
 @property NSURL* url;
 @property NSURL* clickUrl;
 @property NSURL* refererUrl;
-@property NSUInteger height;
-@property NSUInteger width;
+@property NSString* height;
+@property NSString* width;
 
 @end
 
@@ -88,7 +97,7 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface Address : NSObject
+@interface Address : KLPAncestor
 
 @property NSString* streetAddress;
 @property NSString* city;
@@ -101,7 +110,7 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface Phone : NSObject
+@interface Phone : KLPAncestor
 
 @property NSString* type;
 @property NSString* number;
@@ -112,7 +121,7 @@ static KLPStandardDeserializer* deserializer;
 
 @end
 
-@interface NestedObjectWithArray : NSObject<KLPDeserializable>
+@interface NestedObjectWithArray : KLPAncestor
 
 @property NSString* firstName;
 @property NSString* lastName;
@@ -123,6 +132,7 @@ static KLPStandardDeserializer* deserializer;
 @end
 
 @implementation NestedObjectWithArray
+
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [Phone class]};
 }
@@ -169,11 +179,12 @@ static KLPStandardDeserializer* deserializer;
 }
 
 + (void) setUp {
+    deserializer = [[KLPStandardDeserializer alloc] init];
 }
 
 - (void)setUp {
     [super setUp];
-    deserializer = [[KLPStandardDeserializer alloc] init];
+    [KLPDeserializer setGlobalNamingStrategy:[[KLPDefaultNamingStrategy alloc] init]];
 }
 
 - (void)tearDown {
@@ -182,7 +193,7 @@ static KLPStandardDeserializer* deserializer;
 
 - (void)testSimpleParsing {
     NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject"];
-    SimpleObject* object = [deserializer deserialize:[SimpleObject class] json:jsonDict];
+    SimpleObject* object = (SimpleObject*)[deserializer deserialize:[SimpleObject class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.name isEqualToString:@"A green door"]);
@@ -191,7 +202,7 @@ static KLPStandardDeserializer* deserializer;
 
 - (void)testNestedObjectParse {
     NSDictionary* jsonDict = [self getJsonFile:@"NestedObject"];
-    NestedObject* object = [deserializer deserialize:[NestedObject class] json:jsonDict];
+    NestedObject* object = (NestedObject*)[deserializer deserialize:[NestedObject class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.title isEqualToString:@"potato jpg"]);
@@ -212,27 +223,22 @@ static KLPStandardDeserializer* deserializer;
 
 - (void) testCustomTypeMapping {
     StringToNSURLConverter* urlConverter = [[StringToNSURLConverter alloc] init];
-    StringToNSUIntegerConverter* integerConverter = [[StringToNSUIntegerConverter alloc] init];
-    [deserializer addValueConverter:urlConverter forField:@"Url" forInputType:String forOutputClass:nil];
-    [deserializer addValueConverter:urlConverter forField:@"ClickUrl" forInputType:String forOutputClass:nil];
-    [deserializer addValueConverter:urlConverter forField:@"RefererUrl" forInputType:String forOutputClass:nil];
-    [deserializer addValueConverter:integerConverter forField:@"Height" forInputType:String forOutputClass:nil];
-    [deserializer addValueConverter:integerConverter forField:@"Width" forInputType:String forOutputClass:nil];
+    [deserializer addValueConverter:urlConverter forField:@"url" forInputType:String forOutputClass:[NSURL class]];
+    [deserializer addValueConverter:urlConverter forField:@"clickUrl" forInputType:String forOutputClass:[NSURL class]];
+    [deserializer addValueConverter:urlConverter forField:@"refererUrl" forInputType:String forOutputClass:[NSURL class]];
     
     NSDictionary* jsonDict = [self getJsonFile:@"NestedObject"];
-    NestedObjectCustomTypeMapping* object = [deserializer deserialize:[NestedObjectCustomTypeMapping class] json:jsonDict];
+    NestedObjectCustomTypeMapping* object = (NestedObjectCustomTypeMapping*)[deserializer deserialize:[NestedObjectCustomTypeMapping class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.url.absoluteString isEqualToString:@"http://www.mediaindonesia.com/spaw/uploads/images/potato.jpg"]);
     XCTAssertTrue([object.clickUrl.absoluteString isEqualToString:@"http://www.mediaindonesia.com/spaw/uploads/images/potato.jpg"]);
     XCTAssertTrue([object.refererUrl.absoluteString isEqualToString:@"http://www.mediaindonesia.com/mediaperempuan/index.php?ar_id=Nzkw"]);
-    XCTAssertTrue(object.height == 362);
-    XCTAssertTrue(object.width == 532);
 }
 
 - (void) testNestedArrayParsing {
     NSDictionary* jsonDict = [self getJsonFile:@"NestedObjectWithArray"];
-    NestedObjectWithArray* object = [deserializer deserialize:[NestedObjectWithArray class] json:jsonDict];
+    NestedObjectWithArray* object = (NestedObjectWithArray*)[deserializer deserialize:[NestedObjectWithArray class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.firstName isEqualToString:@"John"]);
@@ -258,10 +264,8 @@ static KLPStandardDeserializer* deserializer;
 }
 
 - (void) testCustomNamingStrategy {
-    [deserializer setGlobalNamingStrategy:[[KLPExplicitNamingStrategy alloc] init]];
-    
     NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject2"];
-    SimpleObject2* object = [deserializer deserialize:[SimpleObject2 class] json:jsonDict];
+    SimpleObject2* object = (SimpleObject2*)[deserializer deserialize:[SimpleObject2 class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.Name isEqualToString:@"A green door"]);
@@ -270,14 +274,14 @@ static KLPStandardDeserializer* deserializer;
 
 - (void) testShouldNotParseJsonWithoutRequiredProperty {
     NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject3"];
-    SimpleObject* object = [deserializer deserialize:[SimpleObject class] json:jsonDict];
+    SimpleObject* object = (SimpleObject*)[deserializer deserialize:[SimpleObject class] json:jsonDict];
     
     XCTAssertNil(object);
 }
 
 - (void) testCustomFieldsMapping {
     NSDictionary* jsonDict = [self getJsonFile:@"SimpleObject"];
-    SimpleObject3* object = [deserializer deserialize:[SimpleObject3 class] json:jsonDict];
+    SimpleObject3* object = (SimpleObject3*)[deserializer deserialize:[SimpleObject3 class] json:jsonDict];
     
     XCTAssertNotNil(object);
     XCTAssertTrue([object.ammo isEqualToString:@"A green door"]);
