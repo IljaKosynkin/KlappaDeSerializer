@@ -286,23 +286,29 @@ NSArray* objects = [KLPDeserializer deserializeWithString:[KLPFNestedObject clas
 ```
 # Custom fields mapping
 ## Naming strategies
-Naming strategy - is a class that decides how the name of field from JSON should be translated to the name of a class. 
+Naming strategy - is a class that decides how the name of field from class should be translated to the name in a JSON. 
 KlappaDeSerializer provides two strategies out of the box: KLPDefaultNamingStrategy and KLPExplicitNamingStrategy.
-Explicit naming strategy is translates field from JSON one-to-one. For example, if you have field named "awesome_field" it will be translated to field "awesme_field" in the class. 
-Default naming strategy translates snake_case to camelCase, i.e. if you have field "awesome_field" in your JSON
+Explicit naming strategy is translates field from class one-to-one. For example, if you have field named "awesome_field" it will be translated to field "awesme_field" in the JSON. 
+Default naming strategy translates camelCase to snake_case, i.e. if you have field "awesomeField" in your class, library will search for field "awesome_field" in a JSON.
+Currently possibility of swapping global strategy on the fly is not supported - it's supposed to be added in next releases.
 
 ## Class-local fields mapping
-Sometimes you want to set custom mapping for one or two fields for one class and don't set it globally, as with naming strategies. In KlappaInjector you can achieve it by implementing function:
+Sometimes you want to set custom mapping for one or two fields for one class and don't set it globally, as with naming strategies. In KlappaInjector you can achieve it in two ways - by implementing function:
 ```objective-c
 + (NSDictionary*) getCustomFieldsMapping;
 ```
-In this function you define how one field will be translated to another. So lets assume you have field "super_puper_awesome_url" and in your model you want to put it into field called simply "url". In such case you can implement function in following way:
+or by implementing function:
+```objective-c
++ (id<KLPNamingStrategy>) getNamingStrategy;
+```
+
+In getCustomFieldsMapping function you define how one field will be translated to another. So lets assume you have field "url" in your class and in JSON it corresponds to "super_puper_awesome_url". In such case you can implement function in following way:
 ```objective-c
 + (NSDictionary*) getCustomFieldsMapping {
-    return @{@"super_puper_awesome_url": @"url"};
+    return @{@"url": @"super_puper_awesome_url"};
 }
 ```
-and you are free to go. 
+However, this will let you to translate fields one by one. If you want to set different naming strategy for class (i.e. one entity in API for some reason have different naming strategy), you should implement getNamingStrategy instead. That fucntion should define strategy of converting class' fields to JSON fields for this particular class.
 
 # Required properties
 It's quite common that in your network model you have some fields that are necessary for application to work and you don't want to pass objects that doesn't have those fields. KlappaInjector allows you to specify such required fields. In order to do so, you must implement function:
