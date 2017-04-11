@@ -328,4 +328,4 @@ Note that all classes to which you want to deserialize JSON must conform to KLPD
 Please, **DO NOT** make extension on NSObject to conform to this protocol, inherit your classes from KLPAncestor instead.
 
 # Contributing
-All contributions and feedback are very appreciated and welcomed. If you have some issues or questions how KlappaInjector works - you always can ask it in issues section or provide fix as Pull Request.
+All contributions and feedback are very appreciated and welcomed. If you have some issues or questions how KlappaDeSerializer works - you always can ask it in issues section or provide fix as Pull Request.
