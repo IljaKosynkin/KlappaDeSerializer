@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "KlappaDeSerializer"
-  s.version      = "2.1.0"
+  s.version      = "2.1.1"
   s.summary      = "Lightweight library for JSON to object mapping using KVC and ObjC-Runtime"
 
   s.description  = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author             = { "Ilia Kosynkin" => "ilja.kosynkin@gmail.com" }
 
-  s.source       = { :git => "https://github.com/IljaKosynkin/KlappaDeSerializer.git", :tag => "v2.1.0" }
+  s.source       = { :git => "https://github.com/IljaKosynkin/KlappaDeSerializer.git", :tag => "v2.1.1" }
 
   s.source_files  = "KlappaDeSerializer", "KlappaDeSerializer/**/*.{h,m,c}"
   s.exclude_files = "Classes/Exclude"

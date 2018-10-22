@@ -19,19 +19,27 @@
 @property NSString*  Type;
 @property NSString*  FileName;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation ArtworkInfo
-
++ (id<KLPDeserializable>) allocate {
+    return [[ArtworkInfo alloc] init];
+}
 @end
 
 @interface Artwork : KLPAncestor
 
 @property NSArray* ArtworkInfos;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
 @end
 
 @implementation Artwork
++ (id<KLPDeserializable>) allocate {
+    return [[Artwork alloc] init];
+}
 
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"ArtworkInfos": [ArtworkInfo class]};
@@ -69,9 +77,14 @@
 @property NSString* ChanFilters;
 @property NSString* XMLTVID;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
 @end
 
 @implementation Channel
++ (id<KLPDeserializable>) allocate {
+    return [[Channel alloc] init];
+}
 
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"Programs": [NSString class]};
@@ -95,10 +108,13 @@
 @property NSString* PlayGroup;
 @property NSString* Status;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Recording
-
++ (id<KLPDeserializable>) allocate {
+    return [[Recording alloc] init];
+}
 @end
 
 @interface Program : KLPAncestor
@@ -130,10 +146,13 @@
 @property NSString* ProgramId;
 @property NSString* CatType;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Program
-
++ (id<KLPDeserializable>) allocate {
+    return [[Program alloc] init];
+}
 @end
 
 @interface ProgramList : KLPAncestor
@@ -146,9 +165,14 @@
 @property NSArray* Programs;
 @property NSString* Count;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
 @end
 
 @implementation ProgramList
++ (id<KLPDeserializable>) allocate {
+    return [[ProgramList alloc] init];
+}
 
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"Programs": [Program class]};
@@ -160,10 +184,13 @@
 
 @property ProgramList* ProgramList;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Large
-
++ (id<KLPDeserializable>) allocate {
+    return [[Large alloc] init];
+}
 @end
 
 

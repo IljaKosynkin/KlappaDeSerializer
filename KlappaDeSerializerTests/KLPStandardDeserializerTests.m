@@ -18,9 +18,15 @@ static KLPStandardDeserializer* deserializer;
 @interface SimpleObject : KLPAncestor
 @property NSString* name;
 @property NSDecimalNumber* price;
+
++ (id<KLPDeserializable>) allocate;
++ (NSArray*) getRequiredFields;
 @end
 
 @implementation SimpleObject
++ (id<KLPDeserializable>) allocate {
+    return [[SimpleObject alloc] init];
+}
 
 + (NSArray*) getRequiredFields {
     return @[@"name"];
@@ -31,9 +37,16 @@ static KLPStandardDeserializer* deserializer;
 @interface SimpleObject2 : KLPAncestor
 @property NSString* Name;
 @property NSDecimalNumber* Price;
+
++ (id<KLPDeserializable>) allocate;
++ (id<KLPNamingStrategy>) getNamingStrategy;
 @end
 
 @implementation SimpleObject2
++ (id<KLPDeserializable>) allocate {
+    return [[SimpleObject2 alloc] init];
+}
+
 + (id<KLPNamingStrategy>) getNamingStrategy {
     return [[KLPExplicitNamingStrategy alloc] init];
 }
@@ -42,9 +55,15 @@ static KLPStandardDeserializer* deserializer;
 @interface SimpleObject3 : KLPAncestor
 @property NSString* ammo;
 @property NSDecimalNumber* price;
+
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getCustomFieldsMapping;
 @end
 
 @implementation SimpleObject3
++ (id<KLPDeserializable>) allocate {
+    return [[SimpleObject3 alloc] init];
+}
 
 + (NSDictionary*) getCustomFieldsMapping {
     return @{@"ammo": @"name"};
@@ -58,10 +77,13 @@ static KLPStandardDeserializer* deserializer;
 @property NSString* height;
 @property NSString* width;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Thumbnail
-
++ (id<KLPDeserializable>) allocate {
+    return [[Thumbnail alloc] init];
+}
 @end
 
 @interface NestedObject : KLPAncestor
@@ -77,10 +99,13 @@ static KLPStandardDeserializer* deserializer;
 @property NSString* width;
 @property Thumbnail* thumbnail;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation NestedObject
-
++ (id<KLPDeserializable>) allocate {
+    return [[NestedObject alloc] init];
+}
 @end
 
 @interface NestedObjectCustomTypeMapping : KLPAncestor
@@ -91,10 +116,13 @@ static KLPStandardDeserializer* deserializer;
 @property NSString* height;
 @property NSString* width;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation NestedObjectCustomTypeMapping
-
++ (id<KLPDeserializable>) allocate {
+    return [[NestedObjectCustomTypeMapping alloc] init];
+}
 @end
 
 @interface Address : KLPAncestor
@@ -104,10 +132,13 @@ static KLPStandardDeserializer* deserializer;
 @property NSString* state;
 @property NSString* postalCode;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Address
-
++ (id<KLPDeserializable>) allocate {
+    return [[Address alloc] init];
+}
 @end
 
 @interface Phone : KLPAncestor
@@ -115,10 +146,13 @@ static KLPStandardDeserializer* deserializer;
 @property NSString* type;
 @property NSString* number;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation Phone
-
++ (id<KLPDeserializable>) allocate {
+    return [[Phone alloc] init];
+}
 @end
 
 @interface NestedObjectWithArray : KLPAncestor
@@ -129,9 +163,14 @@ static KLPStandardDeserializer* deserializer;
 @property Address* address;
 @property NSArray* phoneNumber;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
 @end
 
 @implementation NestedObjectWithArray
++ (id<KLPDeserializable>) allocate {
+    return [[NestedObjectWithArray alloc] init];
+}
 
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [Phone class]};

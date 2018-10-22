@@ -15,10 +15,14 @@
 @interface KLPFSimpleObject : KLPAncestor
 @property NSString* name;
 @property NSDecimalNumber* price;
+
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFSimpleObject
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFSimpleObject alloc] init];
+}
 @end
 
 @interface KLPFThumbnail : KLPAncestor
@@ -27,10 +31,13 @@
 @property NSString* height;
 @property NSString* width;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFThumbnail
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFThumbnail alloc] init];
+}
 @end
 
 @interface KLPFAddress : KLPAncestor
@@ -40,10 +47,13 @@
 @property NSString* state;
 @property NSString* postalCode;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFAddress
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFAddress alloc] init];
+}
 @end
 
 @interface KLPFPhone : KLPAncestor
@@ -51,10 +61,14 @@
 @property NSString* type;
 @property NSString* number;
 
++ (id<KLPDeserializable>) allocate;
+
 @end
 
 @implementation KLPFPhone
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFPhone alloc] init];
+}
 @end
 
 @interface KLPFNestedObjectWithArray : KLPAncestor
@@ -65,9 +79,16 @@
 @property KLPFAddress* address;
 @property NSArray* phoneNumber;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
+
 @end
 
 @implementation KLPFNestedObjectWithArray
+
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFNestedObjectWithArray alloc] init];
+}
 
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [KLPFPhone class]};
@@ -80,10 +101,14 @@
 @property NSArray* ints;
 @property NSArray* strings;
 
++ (id<KLPDeserializable>) allocate;
+
 @end
 
 @implementation KLPFObjectWithArrayOfPrimitives
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFObjectWithArrayOfPrimitives alloc] init];
+}
 @end
 
 @interface KLPAddressDeserializer : NSObject<KLPDeserializerProtocol>
@@ -123,10 +148,14 @@
 @property NSString* width;
 @property KLPFThumbnail* thumbnail;
 
++ (id<KLPDeserializable>) allocate;
+
 @end
 
 @implementation KLPFNestedObject
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFNestedObject alloc] init];
+}
 @end
 
 
