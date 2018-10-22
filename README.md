@@ -8,7 +8,7 @@ and robust way.
 # Installation
 Add:
 ```
-    pod ‘KlappaDeSerializer’
+    pod 'KlappaDeSerializer'
 ```
 to your Podfile.
 
@@ -21,6 +21,10 @@ or:
     pod update
 ```
 And you're free to go.
+
+# Important notes
+## Overriding "allocate" function
+It's quite important to provide an implementation for "allocate" function to support bridging to Swift 4. Examples are provided below. 
 
 # Usage
 ## Simple case
@@ -38,9 +42,14 @@ And according to it class declaration:
 @interface KLPFSimpleObject : KLPAncestor
 @property NSString* name;
 @property NSDecimalNumber* price;
+
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFSimpleObject
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFSimpleObject alloc] init];
+}
 @end
 ```
 
@@ -83,10 +92,13 @@ And according to it classes declarations:
 @property NSString* height;
 @property NSString* width;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFThumbnail
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFThumbnail alloc] init];
+}
 @end
 
 @interface KLPFNestedObject : KLPAncestor
@@ -102,10 +114,13 @@ And according to it classes declarations:
 @property NSString* width;
 @property KLPFThumbnail* thumbnail;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFNestedObject
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFNestedObject alloc] init];
+}
 @end
 ```
 Deserialization is performed in exactly the same way:
@@ -156,10 +171,13 @@ So, lets once again consider following JSON object:
 @property NSString* state;
 @property NSString* postalCode;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFAddress
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFAddress alloc] init];
+}
 @end
 
 @interface KLPFPhone : KLPAncestor
@@ -167,10 +185,13 @@ So, lets once again consider following JSON object:
 @property NSString* type;
 @property NSString* number;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFPhone
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFPhone alloc] init];
+}
 @end
 
 @interface KLPFNestedObjectWithArray : KLPAncestor
@@ -181,9 +202,15 @@ So, lets once again consider following JSON object:
 @property KLPFAddress* address;
 @property NSArray* phoneNumber;
 
++ (id<KLPDeserializable>) allocate;
++ (NSDictionary*) getFieldsToClassMap;
 @end
 
 @implementation KLPFNestedObjectWithArray
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFNestedObjectWithArray alloc] init];
+}
+
 + (NSDictionary*) getFieldsToClassMap {
     return @{@"phoneNumber": [KLPFPhone class]};
 }
@@ -251,10 +278,13 @@ And according class declaration:
 @property NSString* height;
 @property NSString* width;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFThumbnail
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFThumbnail alloc] init];
+}
 @end
 
 @interface KLPFNestedObject : KLPAncestor
@@ -270,10 +300,13 @@ And according class declaration:
 @property NSString* width;
 @property KLPFThumbnail* thumbnail;
 
++ (id<KLPDeserializable>) allocate;
 @end
 
 @implementation KLPFNestedObject
-
++ (id<KLPDeserializable>) allocate {
+    return [[KLPFNestedObject alloc] init];
+}
 @end
 ```
 You can deserialize array in the following way:
